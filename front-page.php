@@ -291,6 +291,7 @@ foreach($categories as $category) {
 							<h2 class="title">Newsletter</h2>
 						</div>
 						<div class="newsletter-widget">
+                            <p>Nec feugiat nisl pretium fusce id velit ut tortor pretium.</p>
 							<?php echo do_shortcode( '[contact-form-7 id="27" title="Контактная форма 1"]' ); ?>
 						</div>
 					</div>
@@ -306,7 +307,7 @@ foreach($categories as $category) {
 						$args = array(
 							'post_type' => 'post',
 							'posts_per_page' => 4,
-                            'orderby' => 'rand'
+							  'orderby' => 'rand'
 						);
 
 						$loop = new WP_Query( $args );
