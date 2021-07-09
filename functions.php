@@ -31,6 +31,43 @@
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
+	
+	function followandrew_widget_areas()
+	{
+		register_sidebar(
+			array(
+				'before_title' => '',
+				'after_title' => '',
+				'before_widget' => '',
+				'after_widget' => '',
+				'name' => 'Sidebar Area',
+				'id' => 'Menu-dropdown',
+				'description' => 'Sidebar Widget Area'
+			)
+		);
+		
+		register_sidebar(
+			array(
+				'before_title' => '',
+				'after_title' => '',
+				'before_widget' => '',
+				'after_widget' => '',
+				'name' => 'Footer Area',
+				'id' => 'footer-1',
+				'description' => 'Footer Widget Area'
+			)
+		);
+	}
+	
+	add_action('widgets_init', 'followandrew_widget_areas');
+	
+
+	
+	function my_extra_fields() {
+		add_meta_box( 'extra_fields', 'Дополнительные поля', 'extra_fields_box_func', 'post', 'normal', 'high'  );
+	}
+	
+	add_action('add_meta_boxes', 'my_extra_fields', 1);
 function twentytwenty_theme_support() {
 
 	// Add default posts and comments RSS feed links to head.

@@ -275,8 +275,6 @@
 $categories = get_categories();
 
 foreach($categories as $category) {
-
-
    echo '<ul><li><a href="' . get_category_link($category->term_id) . '">' . $category->name . '<span>'.$count.'</span></a></li></ul>';
 }
 							?>

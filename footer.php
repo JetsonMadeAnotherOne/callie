@@ -21,7 +21,17 @@
 				<div class="col-md-3">
 					<div class="footer-widget">
 						<div class="footer-logo">
-							<a href="index.html" class="logo"><img src="./img/logo-alt.png" alt=""></a>
+							<a href="index.html" class="logo">
+								<?php
+									$custom_logo_id = get_theme_mod( 'custom_logo' );
+									$logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+									if ( has_custom_logo() ) {
+										echo '<img src="'. esc_url( $logo[0] ) .'" alt="logo">';
+									} else {
+										echo '<img src="./wp-content/themes/twentytwenty/assets/new/img/logo.png" alt="logo">';
+									}
+								?>
+                            </a>
 						</div>
 						<p>Nec feugiat nisl pretium fusce id velit ut tortor pretium. Nisl purus in mollis nunc sed. Nunc non blandit massa enim nec.</p>
 						<ul class="contact-social">
