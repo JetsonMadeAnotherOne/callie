@@ -1531,3 +1531,8 @@ textarea.input {
     margin-left: 0px;
   }
 }
+
+.footer-logo{
+  width: 108px !important;
+  height: 31px !important;
+}

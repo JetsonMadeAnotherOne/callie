@@ -22,15 +22,14 @@
 					<div class="footer-widget">
 						<div class="footer-logo">
 							<a href="index.html" class="logo">
-								<?php
-									$custom_logo_id = get_theme_mod( 'custom_logo' );
-									$logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
-									if ( has_custom_logo() ) {
-										echo '<img src="'. esc_url( $logo[0] ) .'" alt="logo">';
-									} else {
-										echo '<img src="./wp-content/themes/twentytwenty/assets/new/img/logo.png" alt="logo">';
-									}
-								?>
+                                <?php
+                                $options3 = get_theme_mod('img-upload');
+                                if ( strlen($options3) > 0 ) {
+                                    echo '<img class="footer-logo" src="'. $options3 .'" alt="logo">';
+                                } else {
+                                    echo '<img class="footer-logo" src="./wp-content/themes/twentytwenty/assets/new/img/logo-alt.png" alt="logo">';
+                                }
+                                ?>
                             </a>
 						</div>
 						<p>Nec feugiat nisl pretium fusce id velit ut tortor pretium. Nisl purus in mollis nunc sed. Nunc non blandit massa enim nec.</p>

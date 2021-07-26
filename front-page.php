@@ -40,7 +40,7 @@
 							</div>
 							<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 							<ul class="post-meta">
-								<li><a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta( 'display_name', $author_id ); ?></a></li>
+								<li><a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta( 'display_name', 1 ); ?></a></li>
 								<li><?php echo get_the_date('F j, Y'); ?></li>
 							</ul>
 						</div>
@@ -79,7 +79,7 @@
 							</div>
 							<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 							<ul class="post-meta">
-								<li><a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta( 'display_name', $author_id ); ?></a></li>
+								<li><a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta( 'display_name', 1 ); ?></a></li>
 								<li><?php echo get_the_date('F j, Y'); ?></li>
 							</ul>
 						</div>
@@ -142,7 +142,7 @@
 									</div>
 									<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 									<ul class="post-meta">
-										<li><a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta( 'display_name', $author_id ); ?></a></li>
+										<li><a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta( 'display_name', 1 ); ?></a></li>
 										<li><?php echo get_the_date('F j, Y'); ?></li>
 									</ul>
 								</div>
@@ -200,7 +200,7 @@
 									</div>
 									<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 									<ul class="post-meta">
-										<li><a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta( 'display_name', $author_id ); ?></a></li>
+										<li><a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta( 'display_name', 1 ); ?></a></li>
 										<li><?php echo get_the_date('F j, Y'); ?></li>
 									</ul>
 								</div>
@@ -275,7 +275,7 @@
 $categories = get_categories();
 
 foreach($categories as $category) {
-   echo '<ul><li><a href="' . get_category_link($category->term_id) . '">' . $category->name . '<span>'.$count.'</span></a></li></ul>';
+   echo '<ul><li><a href="' . get_category_link($category->term_id) . '">' . $category->name . '<span>'.'</span></a></li></ul>';
 }
 							?>
 						
@@ -419,7 +419,7 @@ foreach($categories as $category) {
 										</div>
 										<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 										<ul class="post-meta">
-										<li><a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta( 'display_name', $author_id ); ?></a></li>
+										<li><a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta( 'display_name', 1 ); ?></a></li>
 										<li><?php echo get_the_date('F j, Y'); ?></li>
 										</ul>
 									</div>
@@ -520,7 +520,7 @@ foreach($categories as $category) {
 							</div>
 							<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 							<ul class="post-meta">
-								<li><a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta( 'display_name', $author_id ); ?></a></li>
+								<li><a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta( 'display_name', 1 ); ?></a></li>
 								<li><?php echo get_the_date('F j, Y'); ?></li>
 							</ul>
 							<p>		<?php the_excerpt()  ?></p>

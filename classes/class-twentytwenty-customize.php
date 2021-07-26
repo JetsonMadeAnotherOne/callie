@@ -204,73 +204,99 @@ if ( ! class_exists( 'TwentyTwenty_Customize' ) ) {
 					'capability' => 'edit_theme_options',
 				)
 			);
-
-			/* Enable Header Search ----------------------------------------------- */
-
+            $wp_customize->add_section(
+                'options',
+                array(
+                    'title'      => __( 'Custom Section', 'twentytwenty' ),
+                    'priority'   => 10,
+                    'capability' => 'edit_theme_options',
+                )
+            );
 			$wp_customize->add_setting(
-				'enable_header_search',
+				'Facebook link',
 				array(
 					'capability'        => 'edit_theme_options',
-					'default'           => true,
-					'sanitize_callback' => array( __CLASS__, 'sanitize_checkbox' ),
+					'default'           => 'https://www.facebook.com/',
 				)
 			);
 
 			$wp_customize->add_control(
-				'enable_header_search',
+				'Facebook link',
 				array(
-					'type'     => 'checkbox',
+					'type'     => 'text',
 					'section'  => 'options',
-					'priority' => 10,
-					'label'    => __( 'Show search in header', 'twentytwenty' ),
+					'label'    => __('Facebook link', 'twentytwenty' ),
 				)
 			);
 
-			/* Show author bio ---------------------------------------------------- */
+            $wp_customize->add_setting(
+                'Twitter link',
+                array(
+                    'capability'        => 'edit_theme_options',
+                    'default'           => 'https://www.twitter.com/',
+                )
+            );
 
-			$wp_customize->add_setting(
-				'show_author_bio',
-				array(
-					'capability'        => 'edit_theme_options',
-					'default'           => true,
-					'sanitize_callback' => array( __CLASS__, 'sanitize_checkbox' ),
-				)
-			);
+            $wp_customize->add_control(
+                'Twitter link',
+                array(
+                    'type'     => 'text',
+                    'section'  => 'options',
+                    'label'    => __('Twitter link', 'twentytwenty' ),
+                )
+            );
 
-			$wp_customize->add_control(
-				'show_author_bio',
-				array(
-					'type'     => 'checkbox',
-					'section'  => 'options',
-					'priority' => 10,
-					'label'    => __( 'Show author bio', 'twentytwenty' ),
-				)
-			);
+            $wp_customize->add_setting(
+                'Google Plus Link',
+                array(
+                    'capability'        => 'edit_theme_options',
+                    'default'           => 'https://myaccount.google.com/profile',
+                )
+            );
 
-			/* Display full content or excerpts on the blog and archives --------- */
+            $wp_customize->add_control(
+                'Google Plus link',
+                array(
+                    'type'     => 'text',
+                    'section'  => 'options',
+                    'label'    => __('Google Plus Link', 'twentytwenty' ),
+                )
+            );
+            $wp_customize->add_setting(
+                'Instagram Link',
+                array(
+                    'capability'        => 'edit_theme_options',
+                    'default'           => 'https://instagram.com',
+                )
+            );
 
-			$wp_customize->add_setting(
-				'blog_content',
-				array(
-					'capability'        => 'edit_theme_options',
-					'default'           => 'full',
-					'sanitize_callback' => array( __CLASS__, 'sanitize_select' ),
-				)
-			);
+            $wp_customize->add_control(
+                'Instagram link',
+                array(
+                    'type'     => 'text',
+                    'section'  => 'options',
+                    'label'    => __('Instagram Link', 'twentytwenty' ),
+                )
+            );
 
-			$wp_customize->add_control(
-				'blog_content',
-				array(
-					'type'     => 'radio',
-					'section'  => 'options',
-					'priority' => 10,
-					'label'    => __( 'On archive pages, posts show:', 'twentytwenty' ),
-					'choices'  => array(
-						'full'    => __( 'Full text', 'twentytwenty' ),
-						'summary' => __( 'Summary', 'twentytwenty' ),
-					),
-				)
-			);
+            $wp_customize->add_setting( 'img-upload',
+                array(
+                    'default' => '',
+                )
+            );
+
+            $wp_customize->add_control(
+                new WP_Customize_Image_Control(
+                    $wp_customize,
+                    'img-upload',
+                    array(
+                        'label' => __('img-upload', 'twentytwenty' ),
+                        'section' => 'options',
+                        'settings' => 'img-upload'
+                    )
+                )
+            );
+
 
 			/**
 			 * Template: Cover Template.
