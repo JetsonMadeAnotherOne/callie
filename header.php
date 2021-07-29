@@ -75,23 +75,17 @@
                                 if ( strlen($link) > 0 ) {
                                     echo '<li><a href='.$link.'><i class="fa fa-facebook"></i></a></li>';
                                 }
-                                ?>
-                                <?php
-                                $link = get_theme_mod('Twitter link');
-                                if ( strlen($link) > 0 ) {
-                                    echo '<li><a href='.$link.'><i class="fa fa-twitter"></i></a></li>';
+                                $link2 = get_theme_mod('Twitter link');
+                                if ( strlen($link2) > 0 ) {
+                                    echo '<li><a href='.$link2.'><i class="fa fa-twitter"></i></a></li>';
                                 }
-                                ?>
-                                <?php
-                                $link = get_theme_mod('Google Plus link');
-                                if ( strlen($link) > 0 ) {
-                                    echo '<li><a href='.$link.'><i class="fa fa-google-plus"></i></a></li>';
+                                $link3 = get_theme_mod('GooglePlusLink');
+                                if ( strlen($link3) > 0 ) {
+                                    echo '<li><a href='.$link3.'><i class="fa fa-google-plus"></i></a></li>';
                                 }
-                                ?>
-                                <?php
-                                $link = get_theme_mod('Instagram link');
-                                if ( strlen($link) > 0 ) {
-                                    echo '<li><a href='.$link.'><i class="fa fa-instagram"></i></a></li>';
+                                $link4 = get_theme_mod('Instagram Link');
+                                if ( strlen($link4) > 0 ) {
+                                    echo '<li><a href='.$link4.'><i class="fa fa-instagram"></i></a></li>';
                                 }
                                 ?>
 							</ul>
@@ -112,12 +106,6 @@
                                 
                                 </a>
 							</div>
-                            <?php
-                            $options = get_theme_mod('textField');;
-                            echo $options;
-                            $options2 = get_theme_mod('textField2');;
-                            echo $options2;
-                            ?>
 
 							<!-- search & aside toggle -->
 							<div class="nav-btns">

@@ -31,37 +31,24 @@
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
-	
-	function followandrew_widget_areas()
-	{
-		register_sidebar(
-			array(
-				'before_title' => '',
-				'after_title' => '',
-				'before_widget' => '',
-				'after_widget' => '',
-				'name' => 'Sidebar Area',
-				'id' => 'Menu-dropdown',
-				'description' => 'Sidebar Widget Area'
-			)
-		);
-		
-		register_sidebar(
-			array(
-				'before_title' => '',
-				'after_title' => '',
-				'before_widget' => '',
-				'after_widget' => '',
-				'name' => 'Footer Area',
-				'id' => 'footer-1',
-				'description' => 'Footer Widget Area'
-			)
-		);
-	}
-	
-	add_action('widgets_init', 'followandrew_widget_areas');
-	
-	
+
+function widget_areas()
+{
+    register_sidebar(
+        array(
+            'before_title' => '<h3 class="footer-title">',
+            'after_title' => '</h3>',
+            'before_widget' => '<li>',
+            'after_widget' => '</li>',
+            'name' => 'Footer Area',
+            'id' => 'test-1',
+            'description' => 'Test Area'
+        )
+    );
+}
+
+add_action('widgets_init', 'widget_areas');
+
 	function my_extra_fields() {
 		add_meta_box( 'extra_fields', 'Дополнительные поля', 'extra_fields_box_func', 'post', 'normal', 'high'  );
 	}

@@ -496,7 +496,6 @@ foreach($categories as $category) {
 			<div class="row">
 				<div class="col-md-8">
 					<?php
-
 					$args = array(
 						'post_type' => 'post',
 						'posts_per_page' => 5

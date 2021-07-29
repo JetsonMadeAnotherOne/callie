@@ -204,14 +204,7 @@ if ( ! class_exists( 'TwentyTwenty_Customize' ) ) {
 					'capability' => 'edit_theme_options',
 				)
 			);
-            $wp_customize->add_section(
-                'options',
-                array(
-                    'title'      => __( 'Custom Section', 'twentytwenty' ),
-                    'priority'   => 10,
-                    'capability' => 'edit_theme_options',
-                )
-            );
+
 			$wp_customize->add_setting(
 				'Facebook link',
 				array(
@@ -245,33 +238,32 @@ if ( ! class_exists( 'TwentyTwenty_Customize' ) ) {
                     'label'    => __('Twitter link', 'twentytwenty' ),
                 )
             );
-
             $wp_customize->add_setting(
-                'Google Plus Link',
+                'GooglePlusLink',
                 array(
                     'capability'        => 'edit_theme_options',
-                    'default'           => 'https://myaccount.google.com/profile',
+                    'default'           => 'https://www.google.com/',
                 )
             );
 
             $wp_customize->add_control(
-                'Google Plus link',
+                'GooglePlusLink',
                 array(
                     'type'     => 'text',
                     'section'  => 'options',
-                    'label'    => __('Google Plus Link', 'twentytwenty' ),
+                    'label'    => __('GooglePlusLink', 'twentytwenty' ),
                 )
             );
             $wp_customize->add_setting(
                 'Instagram Link',
                 array(
                     'capability'        => 'edit_theme_options',
-                    'default'           => 'https://instagram.com',
+                    'default'           => 'https://www.google.com/',
                 )
             );
 
             $wp_customize->add_control(
-                'Instagram link',
+                'Instagram Link',
                 array(
                     'type'     => 'text',
                     'section'  => 'options',

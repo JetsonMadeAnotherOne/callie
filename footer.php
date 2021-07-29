@@ -34,10 +34,24 @@
 						</div>
 						<p>Nec feugiat nisl pretium fusce id velit ut tortor pretium. Nisl purus in mollis nunc sed. Nunc non blandit massa enim nec.</p>
 						<ul class="contact-social">
-							<li><a href="#" class="social-facebook"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#" class="social-twitter"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#" class="social-google-plus"><i class="fa fa-google-plus"></i></a></li>
-							<li><a href="#" class="social-instagram"><i class="fa fa-instagram"></i></a></li>
+                            <?php
+                            $link = get_theme_mod('Facebook link');
+                            if ( strlen($link) > 0 ) {
+                                echo '<li><a class="social-facebook" href='.$link.'><i class="fa fa-facebook"></i></a></li>';
+                            }
+                            $link2 = get_theme_mod('Twitter link');
+                            if ( strlen($link2) > 0 ) {
+                                echo '<li><a class="social-twitter" href='.$link2.'><i class="fa fa-twitter"></i></a></li>';
+                            }
+                            $link3 = get_theme_mod('GooglePlusLink');
+                            if ( strlen($link3) > 0 ) {
+                                echo '<li><a class="social-google-plus" href='.$link3.'><i class="fa fa-google-plus"></i></a></li>';
+                            }
+                            $link4 = get_theme_mod('Instagram Link');
+                            if ( strlen($link4) > 0 ) {
+                                echo '<li><a class="social-instagram" href='.$link4.'><i class="fa fa-instagram"></i></a></li>';
+                            }
+                            ?>
 						</ul>
 					</div>
 				</div>
@@ -46,31 +60,23 @@
 						<h3 class="footer-title">Categories</h3>
 						<div class="category-widget">
 							<ul>
-								<li><a href="#">Lifestyle <span>451</span></a></li>
-								<li><a href="#">Fashion <span>230</span></a></li>
-								<li><a href="#">Technology <span>40</span></a></li>
-								<li><a href="#">Travel <span>38</span></a></li>
-								<li><a href="#">Health <span>24</span></a></li>
+                                <?php
+                                $categories = get_categories();
+                                foreach($categories as $category) {
+                                    echo '<li><a href="' . get_category_link($category->term_id) . '">' . $category->name . '<span>'.'</span></a></li>';
+                                }
+                                ?>
 							</ul>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class="footer-widget">
-						<h3 class="footer-title">Tags</h3>
 						<div class="tags-widget">
 							<ul>
-								<li><a href="#">Social</a></li>
-								<li><a href="#">Lifestyle</a></li>
-								<li><a href="#">Blog</a></li>
-								<li><a href="#">Travel</a></li>
-								<li><a href="#">Technology</a></li>
-								<li><a href="#">Fashion</a></li>
-								<li><a href="#">Life</a></li>
-								<li><a href="#">News</a></li>
-								<li><a href="#">Magazine</a></li>
-								<li><a href="#">Food</a></li>
-								<li><a href="#">Health</a></li>
+                                <?php
+                                    dynamic_sidebar('test-1');
+                                ?>
 							</ul>
 						</div>
 					</div>
@@ -79,11 +85,8 @@
 					<div class="footer-widget">
 						<h3 class="footer-title">Newsletter</h3>
 						<div class="newsletter-widget">
-							<form>
 								<p>Nec feugiat nisl pretium fusce id velit ut tortor pretium.</p>
-								<input class="input" name="newsletter" placeholder="Enter Your Email">
-								<button class="primary-button">Subscribe</button>
-							</form>
+                                <?php echo do_shortcode( '[contact-form-7 id="27" title="Контактная форма 1"]' ); ?>
 						</div>
 					</div>
 				</div>
@@ -93,13 +96,23 @@
 			<!-- row -->
 			<div class="footer-bottom row">
 				<div class="col-md-6 col-md-push-6">
-					<ul class="footer-nav">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="about.html">About Us</a></li>
-						<li><a href="contact.html">Contacts</a></li>
-						<li><a href="#">Advertise</a></li>
-						<li><a href="#">Privacy</a></li>
-					</ul>
+                    <?php
+                    wp_nav_menu(
+                        array(
+                            'menu' => 'primary',
+                            'container' => '',
+                            'theme_location' => 'primary',
+                            'items_wrap' => '<ul id="" class="footer-nav">%3$s</ul>',
+                        )
+                    );
+                    ?>
+<!--					<ul class="footer-nav">-->
+<!--						<li><a href="index.html">Home</a></li>-->
+<!--						<li><a href="about.html">About Us</a></li>-->
+<!--						<li><a href="contact.html">Contacts</a></li>-->
+<!--						<li><a href="#">Advertise</a></li>-->
+<!--						<li><a href="#">Privacy</a></li>-->
+<!--					</ul>-->
 				</div>
 				<div class="col-md-6 col-md-pull-6">
 					<div class="footer-copyright">
