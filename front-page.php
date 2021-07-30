@@ -36,7 +36,7 @@
 							</a>
 						<div class="post-body">
 							<div class="post-category">
-							<?php the_category(); ?>
+                                <?php the_category(' '); ?>
 							</div>
 							<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 							<ul class="post-meta">
@@ -75,7 +75,7 @@
 							</a>
 						<div class="post-body">
 							<div class="post-category">
-							<?php the_category(); ?>
+							<?php the_category(' '); ?>
 							</div>
 							<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 							<ul class="post-meta">
@@ -138,7 +138,7 @@
 								</a>
 								<div class="post-body">
 									<div class="post-category">
-										<?php the_category(); ?>
+                                        <?php the_category(' '); ?>
 									</div>
 									<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 									<ul class="post-meta">
@@ -196,7 +196,7 @@
 								</a>
 								<div class="post-body">
 									<div class="post-category">
-										<?php the_category(); ?>
+                                        <?php the_category(' '); ?>
 									</div>
 									<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 									<ul class="post-meta">
@@ -325,7 +325,7 @@ foreach($categories as $category) {
 
 								<div class="post-body">
 								<div class="post-category">
-									<?php the_category(); ?>
+                                    <?php the_category(' '); ?>
 								</div>
 									<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 							</div>
@@ -415,7 +415,7 @@ foreach($categories as $category) {
 
 									<div class="post-body">
 										<div class="post-category">
-										<?php the_category(); ?>
+                                            <?php the_category(' '); ?>
 										</div>
 										<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 										<ul class="post-meta">
@@ -461,7 +461,7 @@ foreach($categories as $category) {
 							</a>
 							<div class="post-body">
 							<div class="post-category">
-							<?php the_category(); ?>
+                                <?php the_category(' '); ?>
 							</div>
 							<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 						</div>
@@ -514,7 +514,7 @@ foreach($categories as $category) {
 							</a>
 							<div class="post-body">
 							<div class="post-category">
-								<?php the_category(); ?>
+                                <?php the_category(' '); ?>
 
 							</div>
 							<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>

@@ -9,7 +9,7 @@ get_header();
             <div class="col-md-offset-1 col-md-10 text-center">
                 <div class="author">
                     <?php
-                    the_archive_title( '<h1 class="page-title">', '</h1>' );
+                    the_archive_title('<h1 class="page-title">', '</h1>');
                     ?>
                 </div>
             </div>
@@ -20,16 +20,111 @@ get_header();
 <div class="section">
     <!-- container -->
     <div class="container">
-        <!-- row -->
         <div class="row">
+            <!-- row -->
+
             <div class="col-md-8">
+                <div id="hot-post" class="row hot-post">
+                    <div class="hot-post-left">
+                        <?php
+                        $cats = get_the_category();
+                        $args = array(
+                            'post_type' => 'post',
+                            'posts_per_page' => 1,
+                            'cat' => $cats[0]->term_id,
+                        );
+
+                        $loop = new WP_Query($args);
+
+                        while ($loop->have_posts()) {
+                            $loop->the_post();
+                            ?>
+                            <!-- post -->
+                            <div class="post post-thumb">
+                                <a class="post-img" href="<?php the_permalink(); ?>">
+                                    <?php if (has_post_thumbnail()) : ?>
+                                        <img src="<?php the_post_thumbnail_url(); ?>">
+                                    <?php endif; ?>
+                                </a>
+                                <div class="post-body">
+                                    <div class="post-category">
+                                        <?php the_category(' '); ?>
+                                    </div>
+                                    <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                    </h3>
+                                    <ul class="post-meta">
+                                        <li>
+                                            <a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta('display_name', 1); ?></a>
+                                        </li>
+                                        <li><?php echo get_the_date('F j, Y'); ?></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- /post -->
+
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-title">
+                            <h2 class="title">Recent posts</h2>
+                        </div>
+                    </div>
+                    <?php
+
+                    $cats = get_the_category();
+                    $args = array(
+                        'post_type' => 'post',
+                        'posts_per_page' => 1,
+                        'cat' => $cats[0]->term_id,
+                    );
+
+                    $loop = new WP_Query( $args );
+
+                    while ($loop->have_posts()) {
+                        $loop->the_post();
+                        ?>
+                        <!-- post -->
+
+                        <!-- post -->
+                        <div class="col-md-6">
+                            <div class="post">
+                                <a class="post-img" href="<?php the_permalink(); ?>">
+                                    <?php if ( has_post_thumbnail() ) : ?>
+                                        <img src="<?php  the_post_thumbnail_url(); ?>" >
+                                    <?php endif; ?>
+                                </a>
+                                <div class="post-body">
+                                    <div class="post-category">
+                                        <?php the_category(' '); ?>
+                                    </div>
+                                    <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                                    <ul class="post-meta">
+                                        <li><a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta( 'display_name', 1 ); ?></a></li>
+                                        <li><?php echo get_the_date('F j, Y'); ?></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /post -->
+
+                        <?php
+                    }
+                    ?>
+
+
+                </div>
                 <?php
                 $cats = get_the_category();
                 $args = array(
                     'post_type' => 'post',
-                    'posts_per_page' => 10,
+                    'posts_per_page' => 5,
                     'author__in' => array(1),
-                    'cat'     => $cats[0]->term_id,
+                    'cat' => $cats[0]->term_id,
                 );
 
                 $loop = new WP_Query($args);
@@ -66,9 +161,7 @@ get_header();
                 }
                 ?>
 
-                <!-- post -->
 
-                <!-- /post -->
             </div>
             <div class="col-md-4">
                 <!-- ad widget-->
@@ -154,10 +247,11 @@ get_header();
                     </div>
                     <?php
 
+                    $cats = get_the_category();
                     $args = array(
                         'post_type' => 'post',
-                        'posts_per_page' => 4,
-                        'orderby' => 'rand'
+                        'posts_per_page' => 1,
+                        'cat' => $cats[0]->term_id,
                     );
 
                     $loop = new WP_Query($args);
