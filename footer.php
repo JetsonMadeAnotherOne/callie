@@ -21,7 +21,7 @@
 				<div class="col-md-3">
 					<div class="footer-widget">
 						<div class="footer-logo">
-							<a href="index.html" class="logo">
+							<a href="<?php echo get_option('home'); ?>/" class="logo">
                                 <?php
                                 $options3 = get_theme_mod('img-upload');
                                 if ( strlen($options3) > 0 ) {

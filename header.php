@@ -93,7 +93,7 @@
 
 							<!-- logo -->
 							<div class="nav-logo">
-								<a href="index.html" class="logo">
+								<a href="<?php echo get_option('home'); ?>/" class="logo">
 									<?php
 										$custom_logo_id = get_theme_mod( 'custom_logo' );
 										$logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
