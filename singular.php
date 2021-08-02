@@ -31,22 +31,12 @@ get_header();
 
                 <!-- post content -->
                 <div class="section-row">
-                    <h3>Ea vix periculis sententiae, ea blandit pericula abhorreant pri.</h3>
-                    <p>Lorem ipsum dolor sit amet, mea ad idque detraxit, cu soleat graecis invenire eam. Vidisse suscipit liberavisse has ex, vocibus patrioque vim et, sed ex tation reprehendunt. Mollis volumus no vix, ut qui clita habemus, ipsum senserit est et. Ut has soluta epicurei mediocrem, nibh nostrum his cu, sea clita electram reformidans an.</p>
-                    <p>Est in saepe accusam luptatum. Purto deleniti philosophia eum ea, impetus copiosae id mel. Vis at ignota delenit democritum, te summo tamquam delicata pro. Utinam concludaturque et vim, mei ullum intellegam ei. Eam te illum nostrud, suas sonet corrumpit ea per. Ut sea regione posidonium. Pertinax gubergren ne qui, eos an harum mundi quaestio.</p>
-                    <figure class="pull-right">
-                        <img src="./img/media-1.jpg" alt="">
-                        <figcaption>Lorem ipsum dolor sit amet, mea ad idque detraxit,</figcaption>
-                    </figure>
-                    <p>Nihil persius id est, iisque tincidunt abhorreant no duo. Eripuit placerat mnesarchum ius at, ei pro laoreet invenire persecuti, per magna tibique scriptorem an. Aeque oportere incorrupte ius ea, utroque erroribus mel in, posse dolore nam in. Per veniam vulputate intellegam et, id usu case reprimique, ne aperiam scaevola sed. Veritus omnesque qui ad. In mei admodum maiorum iracundia, no omnis melius eum, ei erat vivendo his. In pri nonumes suscipit.</p>
-                    <p>Sit nulla quidam et, eam ea legimus deserunt neglegentur. Et veri nostrud vix, meis minimum atomorum ex sea, stet case habemus mea no. Ut dignissim dissentiet his, mei ea delectus delicatissimi, debet dissentiunt te duo. Sonet partiendo et qui, pro et veri solet singulis. Vidit viderer eleifend ad nam. Minimum eligendi suscipit ius et, vis ex laoreet detracto scripserit, at sumo sale solum pro.</p>
-                    <blockquote class="blockquote">
-                        <p>Ei prima graecis consulatu vix, per cu corpora qualisque voluptaria. Bonorum moderatius in per, ius cu albucius voluptatum. Ne ius torquatos dissentiunt. Brute illum utroque eu quo. Cu tota mediocritatem vis, aliquip cotidieque eu ius, cu lorem suscipit eleifend sit.</p>
-                        <footer class="blockquote-footer">John Doe</footer>
-                    </blockquote>
-                    <p>Mei cu diam sonet audiam, his ad impetus fuisset indoctum. Te sit altera qualisque, stet suavitate ne vel. Euismod suavitate duo eu, habemus rationibus neglegentur ei qui. Debet omittam ad usu, ex vero feugait oporteat eos, id usu sint numquam sententiae.</p>
-                    <figure>
-                        <img src="./img/media-2.jpg" alt="">
+                    <?php
+                    $content = apply_filters( 'the_content', get_the_content() );
+                    echo $content;
+                    ?>
+                 <figure>
+                        <img src="<?php  the_post_thumbnail_url(); ?>" alt="post_img">
                     </figure>
                     <h3>Sit nulla quidam et, eam ea legimus deserunt neglegentur.</h3>
                     <p>No possim singulis sea, dolores salutatus interpretaris eam ad. An singulis postulant his, an inermis urbanitas mel. Wisi veri noster eu est, diam ridens eum in. Omnium imperdiet patrioque quo in, est sumo persecuti abhorreant ei. Sed feugiat iracundia id, inermis percipit eu has.</p>
@@ -75,33 +65,55 @@ get_header();
                 <div class="section-row">
                     <div class="post-nav">
                         <div class="prev-post">
-                                <?php
-                                $prev_post = get_previous_post();
-                                if ( has_post_thumbnail() ) : ?>
-                                <a class="post-img" href="<?php  get_permalink($prev_post); ?>"><img src="<?php  the_post_thumbnail_url(); ?>" >   </a>
-                                <?php endif; ?>
-                            <h3 class="post-title">
-                                <?php
-                                $prev_post = get_previous_post();
-                                echo '<a href="' . get_permalink($prev_post) . '">' . esc_html($prev_post->post_title) . '</a>';
+                            <?php
+                            $post_id = $post->ID; // current post ID
+                            $cat = get_the_category();
+                            $current_cat_id = $cat[0]->cat_ID; // current category ID
+
+                            $args = array(
+                                'category' => $current_cat_id,
+                                'orderby' => 'post_date',
+                                'order' => 'DESC'
+                            );
+                            $posts = get_posts($args);
+                            // get IDs of posts retrieved from get_posts
+                            $ids = array();
+                            foreach ($posts as $thepost) {
+                                $ids[] = $thepost->ID;
+                            }
+                            // get and echo previous and next post in the same category
+                            $thisindex = array_search($post_id, $ids);
+                            $previd = isset($ids[$thisindex - 1]) ? $ids[$thisindex - 1] : false;
+                            $nextid = isset($ids[$thisindex + 1]) ? $ids[$thisindex + 1] : false;
+
+                            if (false !== $previd) {
                                 ?>
-                            </h3>
-                            <span>Previous post</span>
+                                <a rel="prev" class="post-img" href="<?php echo get_permalink($previd) ?>"><img src="<?php echo get_the_post_thumbnail_url($previd); ?>"/></a>
+                                <h3 class="post-title">
+                                    <?php
+                                    echo '<a href="' . get_permalink($previd) . '">' . get_the_title($previd) . '</a>';
+                                    ?>
+                                </h3>
+                                <span>Previous post</span>
+                                <?php
+                            }
+                            ?>
                         </div>
 
                         <div class="next-post">
                             <?php
-                            $next_post = get_next_post();
-                            if ( has_post_thumbnail() ) : ?>
-                                <a class="post-img" href="<?php  get_permalink($next_post); ?>"><img src="<?php  the_post_thumbnail_url(); ?>" >   </a>
-                            <?php endif; ?>
-                            <h3 class="post-title">
-                                <?php
-                                $next_post = get_next_post();
-                                echo '<a href="' . get_permalink($next_post) . '">' . esc_html($next_post->post_title) . '</a>';
+                            if (false !== $nextid) {
                                 ?>
-                            </h3>
-                            <span>Next post</span>
+                                <a rel="prev" class="post-img" href="<?php echo get_permalink($nextid) ?>"><img src="<?php echo get_the_post_thumbnail_url($nextid); ?>"/></a>
+                                <h3 class="post-title">
+                                    <?php
+                                    echo '<a href="' . get_permalink($nextid) . '">' . get_the_title($nextid) . '</a>';
+                                    ?>
+                                </h3>
+                                <span>Next post</span>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -121,10 +133,24 @@ get_header();
                         <div class="media-body">
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                             <ul class="author-social">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <?php
+                                $link = get_theme_mod('Facebook link');
+                                if ( strlen($link) > 0 ) {
+                                    echo '<li><a href='.$link.'><i class="fa fa-facebook"></i></a></li>';
+                                }
+                                $link2 = get_theme_mod('Twitter link');
+                                if ( strlen($link2) > 0 ) {
+                                    echo '<li><a href='.$link2.'><i class="fa fa-twitter"></i></a></li>';
+                                }
+                                $link3 = get_theme_mod('GooglePlusLink');
+                                if ( strlen($link3) > 0 ) {
+                                    echo '<li><a href='.$link3.'><i class="fa fa-google-plus"></i></a></li>';
+                                }
+                                $link4 = get_theme_mod('Instagram Link');
+                                if ( strlen($link4) > 0 ) {
+                                    echo '<li><a href='.$link4.'><i class="fa fa-instagram"></i></a></li>';
+                                }
+                                ?>
                             </ul>
                         </div>
                     </div>

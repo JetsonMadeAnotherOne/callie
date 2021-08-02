@@ -4,6 +4,7 @@ get_header();
 ?>
 <!-- PAGE HEADER -->
 <div class="page-header">
+    <div class="page-header-bg" style="background-image: url(<?php echo the_post_thumbnail_url(); ?>);" data-stellar-background-ratio="0.5"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-offset-1 col-md-10 text-center">
