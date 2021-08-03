@@ -5,18 +5,10 @@ get_header();
     <div class="section">
         <div class="container">
             <div class="row">
-                <?php
-                $args = array(
-                    'post_type' => 'post',
-                    'posts_per_page' => 5,
-                    'paged' => get_query_var('page'),
-                );
-
-                $loop = new WP_Query($args);
-
-                while ($loop->have_posts()) {
-                    $loop->the_post();
-                    ?>
+                <?php $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+                $args = array('post_type' => 'post', 'posts_per_page' => 5, 'paged' => $paged);
+                $wp_query = new WP_Query($args);
+                while (have_posts()) : the_post(); ?>
                     <div class="col-md-6">
                         <div class="post">
                             <a class="post-img" href="<?php the_permalink(); ?>">
@@ -39,22 +31,22 @@ get_header();
                             </div>
                         </div>
                     </div>
-                    <?php
-                }
-                ?>
+                <?php endwhile; ?>
 
+                <!-- then the pagination links -->
+                <?php
+                echo paginate_links(array(
+                    'base' => get_pagenum_link(1) . '%_%',
+                    'format' => ((get_option('permalink_structure') && !$wp_query->is_search) || (is_home() && get_option('show_on_front') !== 'page' && !get_option('page_on_front'))) ? '?paged=%#%' : '&paged=%#%',
+                    'currennext' => get_query_var('pages'),
+                    'total' => $wp_query->max_num_pages,
+                    'prev_t' => false,
+                    'prev_next' => false,
+                ));
+                ?>
             </div>
         </div>
-        <?php
-        echo paginate_links([
-            'base' => user_trailingslashit(wp_normalize_path(get_permalink() . '/%#%/')),
-            'current' => max(1, get_query_var('page')),
-            'total' => $loop->max_num_pages,
-            'prev_next' => false,
-        ]);
-        ?>
     </div>
-
 <?php get_template_part('template-parts/footer-menus-widgets'); ?>
 
 <?php
