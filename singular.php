@@ -119,7 +119,7 @@ get_header();
                 <!-- post author -->
                 <div class="section-row">
                     <div class="section-title">
-                        <h3 class="title">About <a href="author.html">John Doe</a></h3>
+                        <h3 class="title">About <a href="author.html"><?php echo get_the_author_meta('display_name', 1); ?></a></h3>
                     </div>
                     <div class="author media">
                         <div class="media-left">

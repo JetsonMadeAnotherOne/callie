@@ -15,19 +15,19 @@ get_header();
 
                     <ul class="author-social">
                         <?php
-                        $link = get_theme_mod('Facebook link');
+                        $link = get_theme_mod('Facebook Author link');
                         if ( strlen($link) > 0 ) {
                             echo '<li><a href='.$link.'><i class="fa fa-facebook"></i></a></li>';
                         }
-                        $link2 = get_theme_mod('Twitter link');
+                        $link2 = get_theme_mod('Twitter Author link');
                         if ( strlen($link2) > 0 ) {
                             echo '<li><a href='.$link2.'><i class="fa fa-twitter"></i></a></li>';
                         }
-                        $link3 = get_theme_mod('GooglePlusLink');
+                        $link3 = get_theme_mod('Author GooglePlusLink');
                         if ( strlen($link3) > 0 ) {
                             echo '<li><a href='.$link3.'><i class="fa fa-google-plus"></i></a></li>';
                         }
-                        $link4 = get_theme_mod('Instagram Link');
+                        $link4 = get_theme_mod('Instagram Author Link');
                         if ( strlen($link4) > 0 ) {
                             echo '<li><a href='.$link4.'><i class="fa fa-instagram"></i></a></li>';
                         }
