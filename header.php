@@ -167,7 +167,6 @@
 															<!-- post -->
 															<div class="col-md-4">
 																<div class="post post-sm">
-																	<a class="post-img" href="blog-post.html"><img src="./img/post-10.jpg" alt=""></a>
 																	<div class="post-body">
 																		<div class="post-category">
 																			<a href="category.html">Travel</a>
@@ -185,7 +184,6 @@
 															<!-- post -->
 															<div class="col-md-4">
 																<div class="post post-sm">
-																	<a class="post-img" href="blog-post.html"><img src="./img/post-13.jpg" alt=""></a>
 																	<div class="post-body">
 																		<div class="post-category">
 																			<a href="category.html">Travel</a>
@@ -204,7 +202,6 @@
 															<!-- post -->
 															<div class="col-md-4">
 																<div class="post post-sm">
-																	<a class="post-img" href="blog-post.html"><img src="./img/post-12.jpg" alt=""></a>
 																	<div class="post-body">
 																		<div class="post-category">
 																			<a href="category.html">Lifestyle</a>
@@ -228,7 +225,6 @@
 															<!-- post -->
 															<div class="col-md-4">
 																<div class="post post-sm">
-																	<a class="post-img" href="blog-post.html"><img src="./img/post-5.jpg" alt=""></a>
 																	<div class="post-body">
 																		<div class="post-category">
 																			<a href="category.html">Lifestyle</a>
@@ -246,7 +242,6 @@
 															<!-- post -->
 															<div class="col-md-4">
 																<div class="post post-sm">
-																	<a class="post-img" href="blog-post.html"><img src="./img/post-8.jpg" alt=""></a>
 																	<div class="post-body">
 																		<div class="post-category">
 																			<a href="category.html">Fashion</a>
@@ -265,7 +260,6 @@
 															<!-- post -->
 															<div class="col-md-4">
 																<div class="post post-sm">
-																	<a class="post-img" href="blog-post.html"><img src="./img/post-9.jpg" alt=""></a>
 																	<div class="post-body">
 																		<div class="post-category">
 																			<a href="category.html">Lifestyle</a>
