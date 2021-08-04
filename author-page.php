@@ -177,7 +177,8 @@ get_header();
                     $args = array(
                         'post_type' => 'post',
                         'posts_per_page' => 4,
-                        'orderby' => 'rand'
+                        'orderby' => 'rand',
+                        'author__in' => array(1),
                     );
 
                     $loop = new WP_Query($args);

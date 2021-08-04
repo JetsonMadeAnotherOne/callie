@@ -32,8 +32,8 @@ get_header();
                         </div>
                     </div>
                 <?php endwhile; ?>
-
-                <!-- then the pagination links -->
+            </div>
+            <div class="custom-pagination">
                 <?php
                 echo paginate_links(array(
                     'base' => get_pagenum_link(1) . '%_%',

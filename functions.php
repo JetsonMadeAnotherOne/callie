@@ -715,40 +715,6 @@ function twentytwenty_get_customizer_color_vars() {
  *
  * @return array
  */
-/*	function mytheme_customize_register( $wp_customize ) {
-		$wp_customize->add_panel( 'nd_dosth_theme_options',
-			array(
-				'priority'         => 1,
-				'title'            => __( 'Theme Options', 'nd_dosth' ),
-				'description'      => __( 'Theme Modifications like color scheme, theme texts and layout preferences can be done here', 'nd_dosth' ),
-			)
-		);
-		// Text Options Section Inside Theme
-		$wp_customize->add_section( 'nd_dosth_text_options',
-			array(
-				'title'         => __( 'Text Options', 'nd_dosth' ),
-				'priority'      => 1,
-				'panel'         => 'nd_dosth_theme_options'
-			)
-		);
-		$wp_customize->add_setting( 'nd_dosth_copyright_text',
-			array(
-				'default'           => __( 'All rights reserved ', 'nd_dosth' ),
-				'sanitize_callback' => 'sanitize_text_field',
-				'transport'         => 'refresh',
-			)
-		);
-		$wp_customize->add_control( 'nd_dosth_copyright_text',
-			array(
-				'type'        => 'text',
-				'priority'    => 10,
-				'section'     => 'nd_dosth_text_options',
-				'label'       => 'Copyright text',
-				'description' => 'Text put here will be outputted in the footer',
-			)
-		);
-	}
-	add_action( 'customize_register', 'mytheme_customize_register' );*/
 function twentytwenty_get_elements_array() {
 
 	// The array is formatted like this:

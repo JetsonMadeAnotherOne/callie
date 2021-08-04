@@ -15,15 +15,12 @@
 				<div class="col-md-8 hot-post-left">
 					<?php
 					$category = get_field('twoBlocks',7);
-
 					$args = array(
 						'post_type' => 'post',
 						'posts_per_page' => 1,
 						'category_name'=> $category
 					);
-
 					$loop = new WP_Query( $args );
-
 					while ($loop->have_posts()) {
 						$loop->the_post();
 					?>
@@ -46,7 +43,6 @@
 						</div>
 					</div>
 					<!-- /post -->
-
 					<?php
 					}
 					?>
