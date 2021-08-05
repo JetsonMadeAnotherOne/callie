@@ -38,18 +38,6 @@
 				  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 				<![endif]-->
 
-<style type="text/css">
-
-.featured-media {
-    text-align: center;
-}
-.skip-link.screen-reader-text,
-.pagination-single ,
-.comments-wrapper,
-.footer-nav-widgets-wrapper{
-	display: none;
-}
-</style>
 
 		<?php wp_head(); ?>
 
@@ -71,21 +59,21 @@
 							<!-- social -->
 							<ul class="nav-social">
                                 <?php
-                                $link = get_theme_mod('Facebook link');
-                                if ( strlen($link) > 0 ) {
-                                    echo '<li><a href='.$link.'><i class="fa fa-facebook"></i></a></li>';
+                                $linkFacebook = get_theme_mod('Facebook link');
+                                if ( strlen($linkFacebook) > 0 ) {
+                                    echo '<li><a href='.$linkFacebook.'><i class="fa fa-facebook"></i></a></li>';
                                 }
-                                $link2 = get_theme_mod('Twitter link');
-                                if ( strlen($link2) > 0 ) {
-                                    echo '<li><a href='.$link2.'><i class="fa fa-twitter"></i></a></li>';
+                                $linkTwitter = get_theme_mod('Twitter link');
+                                if ( strlen($linkTwitter) > 0 ) {
+                                    echo '<li><a href='.$linkTwitter.'><i class="fa fa-twitter"></i></a></li>';
                                 }
-                                $link3 = get_theme_mod('GooglePlusLink');
-                                if ( strlen($link3) > 0 ) {
-                                    echo '<li><a href='.$link3.'><i class="fa fa-google-plus"></i></a></li>';
+                                $linkGooglePlus = get_theme_mod('GooglePlusLink');
+                                if ( strlen($linkGooglePlus) > 0 ) {
+                                    echo '<li><a href='.$linkGooglePlus.'><i class="fa fa-google-plus"></i></a></li>';
                                 }
-                                $link4 = get_theme_mod('Instagram Link');
-                                if ( strlen($link4) > 0 ) {
-                                    echo '<li><a href='.$link4.'><i class="fa fa-instagram"></i></a></li>';
+                                $linkInstagram = get_theme_mod('Instagram Link');
+                                if ( strlen($linkInstagram) > 0 ) {
+                                    echo '<li><a href='.$linkInstagram.'><i class="fa fa-instagram"></i></a></li>';
                                 }
                                 ?>
 							</ul>
@@ -93,18 +81,16 @@
 
 							<!-- logo -->
 							<div class="nav-logo">
-								<a href="<?php echo get_option('home'); ?>/" class="logo">
+								<div class="logo">
 									<?php
 										$custom_logo_id = get_theme_mod( 'custom_logo' );
 										$logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
 										if ( has_custom_logo() ) {
 											echo '<img src="'. esc_url( $logo[0] ) .'" alt="logo">';
-										} else {
-											echo '<img src="./wp-content/themes/twentytwenty/assets/new/img/logo.png" alt="logo">';
 										}
 									?>
                                 
-                                </a>
+                                </div>
 							</div>
 
 							<!-- search & aside toggle -->

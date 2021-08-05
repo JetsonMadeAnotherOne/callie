@@ -5,3 +5,19 @@ Author: Maksym Ustianov
 
 
 */
+
+
+.featured-media {
+    text-align: center;
+}
+
+.skip-link.screen-reader-text,
+.pagination-single,
+.comments-wrapper,
+.footer-nav-widgets-wrapper {
+    display: none;
+}
+
+.skip-link.screen-reader-text {
+    display: none;
+}

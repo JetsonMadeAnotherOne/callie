@@ -421,14 +421,6 @@
         </div>
         <!-- /container -->
     </div>
-    <!-- /SECTION -->
-    <style type="text/css">
-
-        .skip-link.screen-reader-text {
-            display: none;
-        }
-    </style>
-    <!-- SECTION -->
     <div class="section">
         <!-- container -->
         <div class="container">
