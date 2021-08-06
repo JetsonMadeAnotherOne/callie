@@ -9,8 +9,7 @@ get_header();
                 $args = array('post_type' => 'post', 'posts_per_page' => 5, 'paged' => $paged);
                 $wp_query = new WP_Query($args);
                 while (have_posts()) : the_post(); ?>
-                    <div class="col-md-6">
-                        <div class="post">
+                    <div class="col-md-6 post">
                             <a class="post-img" href="<?php the_permalink(); ?>">
                                 <?php if (has_post_thumbnail()) : ?>
                                     <img src="<?php the_post_thumbnail_url(); ?>">
@@ -24,11 +23,10 @@ get_header();
                                 </h3>
                                 <ul class="post-meta">
                                     <li>
-                                        <a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta('display_name', 1); ?></a>
+                                        <a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta('display_name', the_field('author_id')); ?></a>
                                     </li>
                                     <li><?php echo get_the_date('F j, Y'); ?></li>
                                 </ul>
-                            </div>
                         </div>
                     </div>
                 <?php endwhile; ?>
@@ -47,7 +45,6 @@ get_header();
             </div>
         </div>
     </div>
-<?php get_template_part('template-parts/footer-menus-widgets'); ?>
 
 <?php
 get_footer();

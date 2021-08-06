@@ -124,11 +124,6 @@
 </footer>
 <!-- /FOOTER -->
 
-<!-- jQuery Plugins -->
-<script src="<?php echo get_stylesheet_directory_uri() ?>/assets/new/js/jquery.min.js"></script>
-<script src="<?php echo get_stylesheet_directory_uri() ?>/assets/new/js/bootstrap.min.js"></script>
-<script src="<?php echo get_stylesheet_directory_uri() ?>/assets/new/js/jquery.stellar.min.js"></script>
-<script src="<?php echo get_stylesheet_directory_uri() ?>/assets/new/js/main.js"></script>
 
 <?php wp_footer(); ?>
 </body>
