@@ -34,7 +34,7 @@ get_header();
 		            $lastposts = get_posts($args);
 		
 		            foreach ($lastposts as $post) {
-			            setup_postdata($post); // устанавливаем данные
+			            setup_postdata($post);
 			            ?>
                         <div class="post post-row">
                             <a class="post-img" href="<?php the_permalink(); ?>">

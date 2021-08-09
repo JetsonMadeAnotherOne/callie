@@ -19,7 +19,7 @@
 					$lastposts = get_posts($args);
 					
 					foreach ($lastposts as $post) {
-						setup_postdata($post); // устанавливаем данные
+						setup_postdata($post);
 						?>
 						<?php if ($lastposts[0]->ID == $post->ID) : ?>
                             <div class="col-md-8 hot-post-left">
@@ -83,7 +83,7 @@
 		                    $lastposts = get_posts($args);
 		
 		                    foreach ($lastposts as $post) {
-		                    setup_postdata($post); // устанавливаем данные
+		                    setup_postdata($post);
 	                    ?>
                                 <div class="col-md-6">
                                     <div class="post">
@@ -122,7 +122,7 @@
 		                            $lastposts = get_posts($args);
 		
 		                            foreach ($lastposts as $post) {
-			                            setup_postdata($post); // устанавливаем данные
+			                            setup_postdata($post);
 			                            ?>
                                         <div class="col-md-4">
                                             <div class="post post-sm">
@@ -178,7 +178,7 @@
 		            $lastposts = get_posts($args);
 		
 		            foreach ($lastposts as $post) {
-			            setup_postdata($post); // устанавливаем данные
+			            setup_postdata($post);
 			            ?>
                         <div class="col-md-4">
                             <div class="post">
@@ -218,7 +218,7 @@
 		            $lastposts = get_posts($args);
 		
 		            foreach ($lastposts as $post) {
-			            setup_postdata($post); // устанавливаем данные
+			            setup_postdata($post);
 			            ?>
                         <div class="col-md-4">
                             <div class="post post-widget">
@@ -258,7 +258,7 @@
 		            $lastposts = get_posts($args);
 		
 		            foreach ($lastposts as $post) {
-			            setup_postdata($post); // устанавливаем данные
+			            setup_postdata($post);
 			            ?>
                         <div class="col-md-8">
                             <div class="post post-row">
