@@ -55,7 +55,14 @@
 
 							<!-- logo -->
 							<div class="nav-logo">
-								<div class="logo">
+                                <a class="logo" href="<?php
+									if (!is_home()) {
+										echo get_option('home');
+									}
+									else {
+									    echo '#';
+                                    }
+									?>/">
 									<?php
 										$custom_logo_id = get_theme_mod( 'custom_logo' );
 										$logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
@@ -64,7 +71,7 @@
 										}
 									?>
                                 
-                                </div>
+                                </a>
 							</div>
 
 							<!-- search & aside toggle -->

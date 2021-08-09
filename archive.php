@@ -28,7 +28,6 @@ get_header();
 		            $args = array(
 			            'post_type' => 'post',
 			            'posts_per_page' => 5,
-			            'author__in' => array(1),
 			            'cat' => $cats[0]->term_id,
 		            );
 		            $lastposts = get_posts($args);
