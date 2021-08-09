@@ -119,7 +119,7 @@ get_header();
                 <!-- post author -->
                 <div class="section-row">
                     <div class="section-title">
-                        <h3 class="title">About <a href="author.html"><?php echo get_the_author_meta('display_name', the_field('author_id')); ?></a></h3>
+                        <h3 class="title">About <a href="author.html"><?php echo(get_field('author_field')->post_title); ?></a></h3>
                     </div>
                     <div class="author media">
                         <div class="media-left">
@@ -192,8 +192,8 @@ get_header();
                                                         href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                             </h3>
                                             <ul class="post-meta">
-                                                <li><a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta('display_name', the_field('author_id')); ?></a></li>
-                                                <li><?php echo get_the_date('F j, Y'); ?></li>
+                                                <li><a href="<?php the_permalink(); ?>"><?php echo(get_field('author_field')->post_title); ?></a></li>
+                                                <li><?php echo get_the_date('j F Y'); ?></li>
                                             </ul>
                                         </div>
                                     </div>

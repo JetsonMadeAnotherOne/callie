@@ -9,7 +9,7 @@ get_header();
             <div class="col-md-offset-1 col-md-10 text-center">
                 <div class="author">
                     <img class="author-img center-block" src="./img/avatar-1.jpg" alt="">
-                    <h1 class="text-uppercase"><?php echo get_the_author_meta('display_name', the_field('author_id')); ?></h1>
+                    <h1 class="text-uppercase"><?php echo(get_field('author_field')->post_title); ?></h1>
 
                     <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
@@ -70,9 +70,9 @@ get_header();
                                 <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                                 <ul class="post-meta">
                                     <li>
-                                        <a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta('display_name', the_field('author_id')); ?></a>
+                                        <a href="<?php the_permalink(); ?>"><?php echo(get_field('author_field')->post_title); ?></a>
                                     </li>
-                                    <li><?php echo get_the_date('F j, Y'); ?></li>
+                                    <li><?php echo get_the_date('j F Y'); ?></li>
                                 </ul>
                                 <p>        <?php the_excerpt() ?></p>
                             </div>

@@ -49,9 +49,9 @@ get_header();
                                 <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                                 <ul class="post-meta">
                                     <li>
-                                        <a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta('display_name', the_field('author_id')); ?></a>
+                                        <a href="<?php the_permalink(); ?>"><?php echo(get_field('author_field')->post_title); ?></a>
                                     </li>
-                                    <li><?php echo get_the_date('F j, Y'); ?></li>
+                                    <li><?php echo get_the_date('j F Y'); ?></li>
                                 </ul>
                                 <p>        <?php the_excerpt() ?></p>
                             </div>
