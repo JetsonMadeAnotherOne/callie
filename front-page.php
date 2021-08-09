@@ -39,7 +39,7 @@
 			                                        echo(get_field('author_field')->post_title);
 		                                        ?></a>
                                         </li>
-                                        <li><?php echo get_the_date('F j, Y'); ?></li>
+                                        <li><?php echo get_the_date('j F Y'); ?></li>
                                     </ul>
                                 </div>
                             </div>
@@ -180,6 +180,52 @@
                             </div>
 					        <?php
 						        $args = array(
+							        'posts_per_page' => 1,
+							        'cat' => $categories[$i]->term_id,
+						        );
+						        $lastposts = get_posts($args);
+						
+						        foreach ($lastposts as $post) {
+							        setup_postdata($post);
+							        ?>
+                                    <div class="post">
+                                        <a class="post-img" href="<?php the_permalink(); ?>">
+									        <?php if (has_post_thumbnail()) : ?>
+                                                <img src="<?php the_post_thumbnail_url(); ?>">
+									        <?php endif; ?>
+                                        </a>
+
+                                        <div class="post-body">
+                                            <div class="post-category">
+										        <?php the_category(' '); ?>
+                                            </div>
+                                            <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                            </h3>
+                                            <ul class="post-meta">
+                                                <li>
+                                                    <a href="<?php the_permalink(); ?>"><?php echo get_the_author_meta('display_name', the_field('author_id')); ?></a>
+                                                </li>
+                                                <li><?php echo get_the_date('F j, Y'); ?></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+							        <?php
+						        }
+						        wp_reset_postdata();
+					        ?>
+
+                    </div>
+			        <?
+		        }
+	        ?>
+            </div>
+            <div class="row">
+		        <?php
+			        for ($i = 0; $i < 3; $i++) {
+				        ?>
+                        <div class="col-md-4">
+					        <?php
+						        $args = array(
 							        'posts_per_page' => 3,
 							        'cat' => $categories[$i]->term_id,
 						        );
@@ -207,10 +253,10 @@
 						        wp_reset_postdata();
 					        ?>
 
-                    </div>
-			        <?
-		        }
-	        ?>
+                        </div>
+				        <?
+			        }
+		        ?>
             </div>
             
         <!-- /container -->
