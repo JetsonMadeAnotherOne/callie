@@ -1,11 +1,5 @@
 <?php get_header(); ?>
-
-
-    <style type="text/css">
-        .hot-post-right .post:first-child {
-            display: none;
-        }
-    </style>
+    
     <!-- SECTION -->
     <div class="section">
         <!-- container -->
@@ -14,7 +8,7 @@
             <div id="hot-post" class="row hot-post">
 				<?php
 					$args = array(
-						'posts_per_page' => 4,
+						'posts_per_page' => 3,
 					);
 					$lastposts = get_posts($args);
 					
@@ -47,7 +41,7 @@
                                     </ul>
                                 </div>
                             </div>
-						<?php if ($lastposts[0]->ID == $post->ID || $lastposts[3]->ID == $post->ID) : ?>
+						<?php if ($lastposts[0]->ID == $post->ID || $lastposts[2]->ID == $post->ID) : ?>
                         </div>
 					<?php endif; ?>
 						<?php

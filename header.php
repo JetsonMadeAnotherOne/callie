@@ -23,7 +23,6 @@
 <body <?php body_class(); ?>>
 
 <?php wp_body_open();?>
-
 			<!-- HEADER -->
 			<header id="header">
 				<!-- NAV -->
@@ -114,7 +113,8 @@
 											'menu' => 'primary',
 											'container' => '',
 											'theme_location' => 'primary',
-											'items_wrap' => '<li>%3$s</li>'
+											'items_wrap' => '<li>%3$s</li>',
+											'depth' => 2,
 										)
 									);
 								?>

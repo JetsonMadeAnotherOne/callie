@@ -11,13 +11,17 @@ Author: Maksym Ustianov
     text-align: center;
 }
 
-.skip-link.screen-reader-text,
-.pagination-single,
-.comments-wrapper,
-.footer-nav-widgets-wrapper {
-    display: none;
-}
+/*.skip-link.screen-reader-text,*/
+/*.pagination-single,*/
+/*.comments-wrapper,*/
+/*.footer-nav-widgets-wrapper {*/
+/*    display: none;*/
+/*}*/
 
-.skip-link.screen-reader-text {
-    display: none;
-}
+/*.skip-link.screen-reader-text {*/
+/*    display: none;*/
+/*}*/
+
+/*.hot-post-right .post:first-child {*/
+/*    display: none;*/
+/*}*/
