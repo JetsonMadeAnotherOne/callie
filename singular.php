@@ -28,26 +28,24 @@ get_header();
 
                 <!-- post content -->
                 <div class="section-row">
+	                <?php if (has_post_thumbnail()) : ?>
+                        <figure>
+                            <?php the_post_thumbnail('post-thumb'); ?>
+                        </figure>
+	                <?php endif; ?>
                     <?php
-                    $content = apply_filters( 'the_content', get_the_content() );
-                    echo $content;
+	                   the_content();
                     ?>
-                 <figure>
-                        <img src="<?php  the_post_thumbnail_url(); ?>" alt="post_img">
-                    </figure>
-                    <h3>Sit nulla quidam et, eam ea legimus deserunt neglegentur.</h3>
-                    <p>No possim singulis sea, dolores salutatus interpretaris eam ad. An singulis postulant his, an inermis urbanitas mel. Wisi veri noster eu est, diam ridens eum in. Omnium imperdiet patrioque quo in, est sumo persecuti abhorreant ei. Sed feugiat iracundia id, inermis percipit eu has.</p>
-                    <p>In vidit homero ullamcorper his, ea mea senserit constituto, et alia idque congue sit. Postea percipit his ne. Probo movet noluisse in nam, sed ex utroque inermis corrumpit, oratio tation vix at. Usu aperiri assentior at, eam et melius iudicabit pertinacia.</p>
-                </div>
+                  </div>
                 <!-- /post content -->
 
                 <!-- post tags -->
                 <div class="section-row">
+                    <?php if( has_tag() ) : ?>
                     <div class="post-tags">
                         <ul>
                             <li>TAGS:</li>
                             <?php
-                            $post = get_post();
                             $tags = wp_get_post_tags( $post->ID );
                             foreach ($tags as $tag) {
                                 echo '<li>' . $tag->name . '</li>';
@@ -55,64 +53,50 @@ get_header();
                             ?>
                         </ul>
                     </div>
+                    <?php endif; ?>
                 </div>
                 <!-- /post tags -->
 
                 <!-- post nav -->
                 <div class="section-row">
                     <div class="post-nav">
-                        <div class="prev-post">
-                            <?php
-                            $post_id = $post->ID; // current post ID
-                            $cat = get_the_category();
-                            $current_cat_id = $cat[0]->cat_ID; // current category ID
+			            <?php
+				            if (get_previous_post()) {
+					            $prev_post_id = get_previous_post()->ID; ?>
 
-                            $args = array(
-                                'category' => $current_cat_id,
-                                'orderby' => 'post_date',
-                                'order' => 'DESC'
-                            );
-                            $posts = get_posts($args);
-                            // get IDs of posts retrieved from get_posts
-                            $ids = array();
-                            foreach ($posts as $thepost) {
-                                $ids[] = $thepost->ID;
-                            }
-                            // get and echo previous and next post in the same category
-                            $thisindex = array_search($post_id, $ids);
-                            $previd = isset($ids[$thisindex - 1]) ? $ids[$thisindex - 1] : false;
-                            $nextid = isset($ids[$thisindex + 1]) ? $ids[$thisindex + 1] : false;
-
-                            if (false !== $previd) {
-                                ?>
-                                <a rel="prev" class="post-img" href="<?php echo get_permalink($previd) ?>"><img src="<?php echo get_the_post_thumbnail_url($previd); ?>"/></a>
-                                <h3 class="post-title">
-                                    <?php
-                                    echo '<a href="' . get_permalink($previd) . '">' . get_the_title($previd) . '</a>';
-                                    ?>
-                                </h3>
-                                <span>Previous post</span>
-                                <?php
-                            }
-                            ?>
-                        </div>
-
-                        <div class="next-post">
-                            <?php
-                            if (false !== $nextid) {
-                                ?>
-                                <a rel="prev" class="post-img" href="<?php echo get_permalink($nextid) ?>"><img src="<?php echo get_the_post_thumbnail_url($nextid); ?>"/></a>
-                                <h3 class="post-title">
-                                    <?php
-                                    echo '<a href="' . get_permalink($nextid) . '">' . get_the_title($nextid) . '</a>';
-                                    ?>
-                                </h3>
-                                <span>Next post</span>
-                                <?php
-                            }
-                            ?>
-                        </div>
+                                <div class="prev-post">
+                                    <a rel="prev" class="post-img"
+                                       href="<?php echo get_permalink($prev_post_id) ?>"><img
+                                                src="<?php echo get_the_post_thumbnail_url($prev_post_id); ?>"/></a>
+                                    <h3 class="post-title">
+							            <?php
+								            echo '<a href="' . get_permalink($prev_post_id) . '">' . get_the_title($prev_post_id) . '</a>';
+							            ?>
+                                    </h3>
+                                    <span>Previous post</span>
+                                </div>
+					            <?php
+				            }
+			            ?>
+			            <?php
+				            if (get_next_post()) {
+					            $next_post_id = get_next_post()->ID; ?>
+                                <div class="next-post">
+                                    <a rel="prev" class="post-img"
+                                       href="<?php echo get_permalink($next_post_id) ?>"><img
+                                                src="<?php echo get_the_post_thumbnail_url($next_post_id); ?>"/></a>
+                                    <h3 class="post-title">
+							            <?php
+								            echo '<a href="' . get_permalink($next_post_id) . '">' . get_the_title($next_post_id) . '</a>';
+							            ?>
+                                    </h3>
+                                    <span>Next post</span>
+                                </div>
+					            <?php
+				            }
+			            ?>
                     </div>
+
                 </div>
                 <!-- /post nav  -->
 
@@ -162,8 +146,6 @@ get_header();
 
                     <div class="row">
                         <!-- post -->
-                        
-                       
 	                    <?php
 		                    $cats = get_the_category();
 		                    $args = array(
@@ -180,7 +162,7 @@ get_header();
                                     <div class="post post-sm">
                                         <a class="post-img" href="<?php the_permalink(); ?>">
 						                    <?php if (has_post_thumbnail()) : ?>
-                                                <img src="<?php the_post_thumbnail_url(); ?>">
+                                                <img src="<?php the_post_thumbnail_url('post-thumb'); ?>">
 						                    <?php endif; ?>
                                         </a>
 

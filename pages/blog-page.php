@@ -12,7 +12,7 @@ get_header();
                     <div class="col-md-6 post">
                             <a class="post-img" href="<?php the_permalink(); ?>">
                                 <?php if (has_post_thumbnail()) : ?>
-                                    <img src="<?php the_post_thumbnail_url(); ?>">
+                                    <img src="<?php the_post_thumbnail_url('post-thumb'); ?>">
                                 <?php endif; ?>
                             </a>
                             <div class="post-body">

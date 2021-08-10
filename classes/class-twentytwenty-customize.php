@@ -204,7 +204,41 @@ if ( ! class_exists( 'TwentyTwenty_Customize' ) ) {
 					'capability' => 'edit_theme_options',
 				)
 			);
-
+			
+			$wp_customize->add_setting(
+				'Copyright text',
+				array(
+					'capability'        => 'edit_theme_options',
+					'default'           => 'Copyright &copy;2021 All rights reserved | Made with ',
+				)
+			);
+			
+			$wp_customize->add_control(
+				'Copyright text',
+				array(
+					'type'     => 'text',
+					'section'  => 'options',
+					'label'    => __('Copyright text', 'twentytwenty' ),
+				)
+			);
+			
+			$wp_customize->add_setting(
+				'Footer text',
+				array(
+					'capability'        => 'edit_theme_options',
+					'default'           => 'Nec feugiat nisl pretium fusce id velit ut tortor pretium.',
+				)
+			);
+			
+			$wp_customize->add_control(
+				'Footer text',
+				array(
+					'type'     => 'text',
+					'section'  => 'options',
+					'label'    => __('Footer text', 'twentytwenty' ),
+				)
+			);
+			
 			$wp_customize->add_setting(
 				'Facebook link',
 				array(
