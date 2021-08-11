@@ -268,7 +268,7 @@
             <div class="row">
 	            <?php
 		            $args = array(
-			            'posts_per_page' => 9,
+			            'posts_per_page' => 2,
 		            );
 		            $lastposts = get_posts($args);
 		
@@ -309,6 +309,12 @@
         <!-- /container -->
     </div>
     <!-- /SECTION -->
-
+<?php
+	global $wp_query; // you can remove this line if everything works for you
+	if (  $wp_query->max_num_pages > 1 )
+		echo '<div class="section-row loadmore text-center misha_loadmore">
+						<a class="primary-button">Load More</a>
+					</div>';
+?>
 
 <?php get_footer(); ?>
