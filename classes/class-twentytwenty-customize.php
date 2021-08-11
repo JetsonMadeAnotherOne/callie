@@ -304,76 +304,9 @@ if ( ! class_exists( 'TwentyTwenty_Customize' ) ) {
                     'label'    => __('Instagram Link', 'twentytwenty' ),
                 )
             );
+            
 
-            //
-            $wp_customize->add_setting(
-                'Facebook Author link',
-                array(
-                    'capability'        => 'edit_theme_options',
-                    'default'           => 'https://www.facebook.com/',
-                )
-            );
-
-            $wp_customize->add_control(
-                'Facebook Author link',
-                array(
-                    'type'     => 'text',
-                    'section'  => 'options',
-                    'label'    => __('Facebook Author link', 'twentytwenty' ),
-                )
-            );
-
-            $wp_customize->add_setting(
-                'Twitter Author link',
-                array(
-                    'capability'        => 'edit_theme_options',
-                    'default'           => 'https://www.twitter.com/',
-                )
-            );
-
-            $wp_customize->add_control(
-                'Twitter Author link',
-                array(
-                    'type'     => 'text',
-                    'section'  => 'options',
-                    'label'    => __('Twitter Author link', 'twentytwenty' ),
-                )
-            );
-            $wp_customize->add_setting(
-                'Author GooglePlusLink',
-                array(
-                    'capability'        => 'edit_theme_options',
-                    'default'           => 'https://www.google.com/',
-                )
-            );
-
-            $wp_customize->add_control(
-                'Author GooglePlusLink',
-                array(
-                    'type'     => 'text',
-                    'section'  => 'options',
-                    'label'    => __('Author GooglePlusLink', 'twentytwenty' ),
-                )
-            );
-            $wp_customize->add_setting(
-                'Instagram Author Link',
-                array(
-                    'capability'        => 'edit_theme_options',
-                    'default'           => 'https://www.google.com/',
-                )
-            );
-
-            $wp_customize->add_control(
-                'Instagram Author Link',
-                array(
-                    'type'     => 'text',
-                    'section'  => 'options',
-                    'label'    => __('Instagram Author Link', 'twentytwenty' ),
-                )
-            );
-            //
-
-            $wp_customize->add_setting( 'img-upload',
+            $wp_customize->add_setting( 'Footer logo',
                 array(
                     'default' => '',
                 )
@@ -382,11 +315,11 @@ if ( ! class_exists( 'TwentyTwenty_Customize' ) ) {
             $wp_customize->add_control(
                 new WP_Customize_Image_Control(
                     $wp_customize,
-                    'img-upload',
+                    'Footer logo',
                     array(
-                        'label' => __('img-upload', 'twentytwenty' ),
+                        'label' => __('Footer logo', 'twentytwenty' ),
                         'section' => 'options',
-                        'settings' => 'img-upload'
+                        'settings' => 'Footer logo'
                     )
                 )
             );

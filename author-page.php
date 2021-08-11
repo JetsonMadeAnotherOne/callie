@@ -6,32 +6,37 @@ get_header();
 <div class="page-header">
     <div class="container">
         <div class="row">
+            <?php $post_id = get_posts()[0]->ID; ?>
             <div class="col-md-offset-1 col-md-10 text-center">
                 <div class="author">
-                    <img class="author-img center-block" src="./img/avatar-1.jpg" alt="">
-                    <h1 class="text-uppercase"><?php echo(get_field('author_field')->post_title); ?></h1>
-
-                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
+                    <img class="author-img center-block" src='<?php echo get_the_post_thumbnail_url(get_field('author_field', $post_id)->ID); ?>' alt="">
+                    <h1 class="text-uppercase"><?php
+		                    echo get_field('author_field', $post_id)->post_title;
+                        ?></h1>
+                    <p class="lead">
+	                    <?php
+		                    echo get_field('author_field', $post_id)->post_content;
+	                    ?>
+                    </p>
                     <ul class="author-social">
-                        <?php
-                        $link = get_theme_mod('Facebook Author link');
-                        if ( strlen($link) > 0 ) {
-                            echo '<li><a href='.$link.'><i class="fa fa-facebook"></i></a></li>';
-                        }
-                        $link2 = get_theme_mod('Twitter Author link');
-                        if ( strlen($link2) > 0 ) {
-                            echo '<li><a href='.$link2.'><i class="fa fa-twitter"></i></a></li>';
-                        }
-                        $link3 = get_theme_mod('Author GooglePlusLink');
-                        if ( strlen($link3) > 0 ) {
-                            echo '<li><a href='.$link3.'><i class="fa fa-google-plus"></i></a></li>';
-                        }
-                        $link4 = get_theme_mod('Instagram Author Link');
-                        if ( strlen($link4) > 0 ) {
-                            echo '<li><a href='.$link4.'><i class="fa fa-instagram"></i></a></li>';
-                        }
-                        ?>
+	                    <?php
+		                    $linkFacebook = get_fields(get_field('author_field', $post_id)->ID)["facebook-link"];
+		                    if ( strlen($linkFacebook) > 0 ) {
+			                    echo '<li><a href='.$linkFacebook.'><i class="fa fa-facebook"></i></a></li>';
+		                    }
+		                    $linkTwitter = get_fields(get_field('author_field', $post_id)->ID)["twitter-link"];
+		                    if ( strlen($linkTwitter) > 0 ) {
+			                    echo '<li><a href='.$linkTwitter.'><i class="fa fa-twitter"></i></a></li>';
+		                    }
+		                    $linkGooglePlus = get_fields(get_field('author_field', $post_id)->ID)["google-plus-link"];
+		                    if ( strlen($linkGooglePlus) > 0 ) {
+			                    echo '<li><a href='.$linkGooglePlus.'><i class="fa fa-google-plus"></i></a></li>';
+		                    }
+		                    $linkInstagram = get_fields(get_field('author_field', $post_id)->ID)["instagram-link"];
+		                    if ( strlen($linkInstagram) > 0 ) {
+			                    echo '<li><a href='.$linkInstagram.'><i class="fa fa-instagram"></i></a></li>';
+		                    }
+	                    ?>
                     </ul>
                 </div>
             </div>
@@ -48,36 +53,38 @@ get_header();
 	            <?php
 		            $args = array(
 			            'post_type' => 'post',
-			            'posts_per_page' => 5,
-			            'author__in' => array(1),
+			            'posts_per_page' => 9,
 		            );
 		            $lastposts = get_posts($args);
 		
 		            foreach ($lastposts as $post) {
 			            setup_postdata($post);
-			            ?>
-                        <div class="post post-row">
-                            <a class="post-img" href="<?php the_permalink(); ?>">
-					            <?php if (has_post_thumbnail()) : ?>
-                                    <img src="<?php the_post_thumbnail_url('post-thumb'); ?>">
-					            <?php endif; ?>
-                            </a>
-                            <div class="post-body">
-                                <div class="post-category">
-						            <?php the_category(); ?>
+			            if (get_field('author_field')->post_title == 'Author1') :
+				            ?>
+                            <div class="post post-row">
+                                <a class="post-img" href="<?php the_permalink(); ?>">
+						            <?php if (has_post_thumbnail()) : ?>
+                                        <img src="<?php the_post_thumbnail_url(); ?>">
+						            <?php endif; ?>
+                                </a>
+                                <div class="post-body">
+                                    <div class="post-category">
+							            <?php the_category(); ?>
 
+                                    </div>
+                                    <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                    </h3>
+                                    <ul class="post-meta">
+                                        <li>
+                                            <a href="<?php the_permalink(); ?>"><?php echo(get_field('author_field')->post_title); ?></a>
+                                        </li>
+                                        <li><?php echo get_the_date('j F Y'); ?></li>
+                                    </ul>
+                                    <p>        <?php the_excerpt() ?></p>
                                 </div>
-                                <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                <ul class="post-meta">
-                                    <li>
-                                        <a href="<?php the_permalink(); ?>"><?php echo(get_field('author_field')->post_title); ?></a>
-                                    </li>
-                                    <li><?php echo get_the_date('j F Y'); ?></li>
-                                </ul>
-                                <p>        <?php the_excerpt() ?></p>
                             </div>
-                        </div>
 			            <?php
+			            endif;
 		            }
 		            wp_reset_postdata();
 	            ?>
@@ -171,7 +178,7 @@ get_header();
                             <div class="post post-widget">
                                 <a class="post-img" href="<?php the_permalink(); ?>">
 					                <?php if (has_post_thumbnail()) : ?>
-                                        <img src="<?php the_post_thumbnail_url('post-thumb'); ?>">
+                                        <img src="<?php the_post_thumbnail_url(); ?>">
 					                <?php endif; ?>
                                 </a>
 

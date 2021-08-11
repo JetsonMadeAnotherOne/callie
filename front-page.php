@@ -85,7 +85,7 @@
                                     <div class="post">
                                         <a class="post-img" href="<?php the_permalink(); ?>">
 				                            <?php if (has_post_thumbnail()) : ?>
-                                                <img src="<?php the_post_thumbnail_url('post-thumb'); ?>">
+                                                <img src="<?php the_post_thumbnail_url(); ?>">
 				                            <?php endif; ?>
                                         </a>
                                         <div class="post-body">
@@ -142,7 +142,7 @@
                                     <div class="post">
                                         <a class="post-img" href="<?php the_permalink(); ?>">
 									        <?php if (has_post_thumbnail()) : ?>
-                                                <img src="<?php the_post_thumbnail_url('post-thumb'); ?>">
+                                                <img src="<?php the_post_thumbnail_url(); ?>">
 									        <?php endif; ?>
                                         </a>
 
@@ -191,7 +191,7 @@
                                     <div class="post">
                                         <a class="post-img" href="<?php the_permalink(); ?>">
 									        <?php if (has_post_thumbnail()) : ?>
-                                                <img src="<?php the_post_thumbnail_url('post-thumb'); ?>">
+                                                <img src="<?php the_post_thumbnail_url(); ?>">
 									        <?php endif; ?>
                                         </a>
 
@@ -237,7 +237,7 @@
                                     <div class="post post-widget">
                                         <a class="post-img" href="<?php the_permalink(); ?>">
 									        <?php if (has_post_thumbnail()) : ?>
-                                                <img src="<?php the_post_thumbnail_url('post-thumb'); ?>">
+                                                <img src="<?php the_post_thumbnail_url(); ?>">
 									        <?php endif; ?>
                                         </a>
                                         <div class="post-body">
@@ -279,7 +279,7 @@
                             <div class="post post-row">
                                 <a class="post-img" href="<?php the_permalink(); ?>">
 						            <?php if (has_post_thumbnail()) : ?>
-                                        <img src="<?php the_post_thumbnail_url('post-thumb'); ?>">
+                                        <img src="<?php the_post_thumbnail_url(); ?>">
 						            <?php endif; ?>
                                 </a>
                                 <div class="post-body">

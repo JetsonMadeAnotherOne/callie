@@ -30,11 +30,9 @@
 	                        }
                         ?>/" class="logo">
                             <?php
-                            $options3 = get_theme_mod('img-upload');
-                            if (strlen($options3) > 0) {
-                                echo '<img class="footer-logo" src="' . $options3 . '" alt="logo">';
-                            } else {
-                                echo '<img class="footer-logo" src="./wp-content/themes/twentytwenty/assets/new/img/logo-alt.png" alt="logo">';
+                            $footerLogo = get_theme_mod('Footer logo');
+                            if (strlen($footerLogo) > 0) {
+                                echo '<img class="footer-logo" src="' . $footerLogo . '" alt="logo">';
                             }
                             ?>
                         </a>

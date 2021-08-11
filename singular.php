@@ -107,30 +107,35 @@ get_header();
                     </div>
                     <div class="author media">
                         <div class="media-left">
-                            <a href="author.html">
-                                <img class="author-img media-object" src="./img/avatar-1.jpg" alt="">
-                            </a>
+                            <img class="author-img media-object" src='<?php echo get_the_post_thumbnail_url(get_field('author_field')->ID); ?>' alt="">
                         </div>
                         <div class="media-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <p>
+		                        <?php
+			                        $my_postid = get_field('author_field')->ID;
+			                        $content_post = get_post($my_postid);
+			                        $content = $content_post->post_content;
+			                        echo $content;
+		                        ?>
+                            </p>
                             <ul class="author-social">
                                 <?php
-                                $link = get_theme_mod('Facebook link');
-                                if ( strlen($link) > 0 ) {
-                                    echo '<li><a href='.$link.'><i class="fa fa-facebook"></i></a></li>';
-                                }
-                                $link2 = get_theme_mod('Twitter link');
-                                if ( strlen($link2) > 0 ) {
-                                    echo '<li><a href='.$link2.'><i class="fa fa-twitter"></i></a></li>';
-                                }
-                                $link3 = get_theme_mod('GooglePlusLink');
-                                if ( strlen($link3) > 0 ) {
-                                    echo '<li><a href='.$link3.'><i class="fa fa-google-plus"></i></a></li>';
-                                }
-                                $link4 = get_theme_mod('Instagram Link');
-                                if ( strlen($link4) > 0 ) {
-                                    echo '<li><a href='.$link4.'><i class="fa fa-instagram"></i></a></li>';
-                                }
+	                                $linkFacebook = get_fields(get_field('author_field')->ID)["facebook-link"];
+	                                if ( strlen($linkFacebook) > 0 ) {
+		                                echo '<li><a href='.$linkFacebook.'><i class="fa fa-facebook"></i></a></li>';
+	                                }
+	                                $linkTwitter = get_fields(get_field('author_field')->ID)["twitter-link"];
+	                                if ( strlen($linkTwitter) > 0 ) {
+		                                echo '<li><a href='.$linkTwitter.'><i class="fa fa-twitter"></i></a></li>';
+	                                }
+	                                $linkGooglePlus = get_fields(get_field('author_field')->ID)["google-plus-link"];
+	                                if ( strlen($linkGooglePlus) > 0 ) {
+		                                echo '<li><a href='.$linkGooglePlus.'><i class="fa fa-google-plus"></i></a></li>';
+	                                }
+	                                $linkInstagram = get_fields(get_field('author_field')->ID)["instagram-link"];
+	                                if ( strlen($linkInstagram) > 0 ) {
+		                                echo '<li><a href='.$linkInstagram.'><i class="fa fa-instagram"></i></a></li>';
+	                                }
                                 ?>
                             </ul>
                         </div>
