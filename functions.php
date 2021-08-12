@@ -805,16 +805,8 @@ function twentytwenty_get_elements_array() {
 	add_action('wp_enqueue_scripts', 'register_scripts');
 	
 	function load_more_scripts() {
-		
-		// In most cases it is already included on the page and this line can be removed
 		wp_enqueue_script('jquery');
-		
-		// register our main script but do not enqueue it yet
 		wp_register_script( 'core-js', get_stylesheet_directory_uri() . '/assets/new/js/myloadmore.js', array('jquery') );
-		
-		// now the most interesting part
-		// we have to pass parameters to myloadmore.js script but we can get the parameters values only in PHP
-		// you can define variables directly in your HTML but I decided that the most proper way is wp_localize_script()
 		wp_localize_script( 'core-js', 'ajax_posts', array(
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			'noposts' => __('No older posts found', 'twentytwenty'),
