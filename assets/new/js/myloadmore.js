@@ -1,27 +1,25 @@
-console.log('test1');
-jQuery(function($) {
-    var ppp = 3; // Post per page
-    var pageNumber = 1;
+jQuery(function ($) {
+    const ppp = 4;
+    let pageNumber = 1;
 
-    console.log('test2');
-    function load_posts(){
+    function load_posts() {
         pageNumber++;
-        var str = '&pageNumber=' + pageNumber + '&ppp=' + ppp + '&action=more_post_ajax';
+        const str = '&pageNumber=' + pageNumber + '&ppp=' + ppp + '&action=more_post_ajax';
         $.ajax({
             type: "POST",
             dataType: "html",
             url: ajax_posts.ajaxurl,
             data: str,
-            success: function(data){
+            success: function (data) {
                 var $data = $(data);
-                if($data.length){
+                if ($data.length) {
                     $("#ajax-posts").append($data);
-                    $("#more_posts").attr("disabled",false);
-                } else{
-                    $("#more_posts").attr("disabled",true);
+                    $("#more_posts").attr("disabled", true);
+                } else {
+                    $("#more_posts").remove();
                 }
             },
-            error : function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 $loader.html(jqXHR + " :: " + textStatus + " :: " + errorThrown);
             }
 
@@ -29,10 +27,9 @@ jQuery(function($) {
         return false;
     }
 
-    $("#more_posts").on("click",function(){ // When btn is pressed.
-        console.log('test');
-        $("#more_posts").attr("disabled",true); // Disable the button, temp.
+    $("#more_posts").on("click", function () {
+        $("#more_posts").attr("disabled", true);
         load_posts();
-        $(this).insertAfter('#ajax-posts'); // Move the 'Load More' button to the end of the the newly added posts.
+        $(this).insertAfter('#ajax-posts');
     });
 });

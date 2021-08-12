@@ -767,6 +767,10 @@ textarea.input {
   margin-bottom: 10px;
 }
 
+#more_posts > *{
+  cursor: pointer !important;
+}
+
 .post-category a {
   color: #ee4266;
   font-weight: 700;

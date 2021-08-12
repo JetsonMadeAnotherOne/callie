@@ -265,69 +265,47 @@
         <!-- container -->
         <div class="container">
             <!-- row -->
-            <!--<div class="row">
+            <div id="ajax-posts" class="row">
 	            <?php
-/*		            $args = array(
-			            'posts_per_page' => 2,
+		            $args = array(
+			            'posts_per_page' => 3,
 		            );
 		            $lastposts = get_posts($args);
 		
 		            foreach ($lastposts as $post) {
 			            setup_postdata($post);
-			            */?>
+			            ?>
                         <div class="col-md-8">
                             <div class="post post-row">
-                                <a class="post-img" href="<?php /*the_permalink(); */?>">
-						            <?php /*if (has_post_thumbnail()) : */?>
-                                        <img src="<?php /*the_post_thumbnail_url(); */?>">
-						            <?php /*endif; */?>
+                                <a class="post-img" href="<?php the_permalink(); ?>">
+						            <?php if (has_post_thumbnail()) : ?>
+                                        <img src="<?php the_post_thumbnail_url(); ?>">
+						            <?php endif; ?>
                                 </a>
                                 <div class="post-body">
                                     <div class="post-category">
-							            <?php /*the_category(' '); */?>
-
+							            <?php the_category(' '); ?>
                                     </div>
-                                    <h3 class="post-title"><a href="<?php /*the_permalink(); */?>"><?php /*the_title(); */?></a>
+                                    <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                     </h3>
                                     <ul class="post-meta">
                                         <li>
-                                            <a href="<?php /*the_permalink(); */?>"><?php /*echo(get_field('author_field')->post_title); */?></a>
+                                            <a href="<?php the_permalink(); ?>"><?php echo(get_field('author_field')->post_title); ?></a>
                                         </li>
-                                        <li><?php /*echo get_the_date('j F Y'); */?></li>
+                                        <li><?php echo get_the_date('j F Y'); ?></li>
                                     </ul>
-                                    <p>        <?php /*the_excerpt() */?></p>
+                                    <p>        <?php the_excerpt() ?></p>
                                 </div>
                             </div>
                         </div>
 			            <?php
-/*		            }
+		            }
 		            wp_reset_postdata();
-	            */?>
-            </div>-->
-            <div id="ajax-posts" class="row">
-		        <?php
-			        $postsPerPage = 3;
-			        $args = array(
-				        'post_type' => 'post',
-				        'posts_per_page' => $postsPerPage,
-			        );
-			
-			        $loop = new WP_Query($args);
-			
-			        while ($loop->have_posts()) : $loop->the_post();
-				        ?>
-
-                        <div class="small-12 large-4 columns">
-                            <h1><?php the_title(); ?></h1>
-                            <p><?php the_content(); ?></p>
-                        </div>
-			
-			        <?php
-			        endwhile;
-			        wp_reset_postdata();
-		        ?>
+	            ?>
             </div>
-            <div id="more_posts">Load More</div>
+            <div id="more_posts" class="section-row loadmore text-center">
+                <div class="primary-button">Load More</div>
+            </div>
             <!-- /row -->
         </div>
         <!-- /container -->

@@ -827,7 +827,7 @@ function twentytwenty_get_elements_array() {
 	
 	function more_post_ajax(){
 		
-		$ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 3;
+		$ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 4;
 		$page = (isset($_POST['pageNumber'])) ? $_POST['pageNumber'] : 0;
 		
 		header("Content-Type: text/html");
@@ -836,7 +836,7 @@ function twentytwenty_get_elements_array() {
 			'suppress_filters' => true,
 			'post_type' => 'post',
 			'posts_per_page' => $ppp,
-			'paged'    => $page,
+			'paged' => $page,
 		);
 		
 		$loop = new WP_Query($args);
@@ -844,9 +844,31 @@ function twentytwenty_get_elements_array() {
 		$out = '';
 		
 		if ($loop -> have_posts()) :  while ($loop -> have_posts()) : $loop -> the_post();
-			$out .= '<div class="small-12 large-4 columns">
-                <h1>'.get_the_title().'</h1>
-         </div>';
+			$out .= '
+                        <div class="col-md-8">
+                            <div class="post post-row">
+                                <a class="post-img" href="'.get_the_permalink().'">
+						            <?php if (has_post_thumbnail()) : ?>
+                                        <img src="'.get_the_post_thumbnail_url().'">
+						            <?php endif; ?>
+                                </a>
+                                <div class="post-body">
+                                    <div class="post-category">
+							            <a>'.get_the_category()[0]->name.'</a>
+                                    </div>
+                                    <h3 class="post-title"><a href="'.get_the_permalink().'">'.get_the_title().'</a>
+                                    </h3>
+                                    <ul class="post-meta">
+                                        <li>
+                                            <a href="'. get_the_permalink().'">'.get_field("author_field")->post_title .'</a>
+                                        </li>
+                                        <li>'. get_the_date('j F Y') .'</li>
+                                    </ul>
+                                    <p> '. get_the_excerpt() .'</p>
+                                </div>
+                            </div>
+                        </div>
+            ';
 		
 		endwhile;
 		endif;
