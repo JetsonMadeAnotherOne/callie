@@ -155,24 +155,65 @@ $header_menus = wp_get_nav_menu_items( $header_menu_id );
 					<!-- /Main Nav -->
 
 					<!-- Aside Nav -->
-					<div id="nav-aside">
-						<ul class="nav-aside-menu">
-							<li><a href="index.html">Home</a></li>
-							<li class="has-dropdown"><a>Categories</a>
-								<ul class="dropdown">
-									<li><a href="#">Lifestyle</a></li>
-									<li><a href="#">Fashion</a></li>
-									<li><a href="#">Technology</a></li>
-									<li><a href="#">Travel</a></li>
-									<li><a href="#">Health</a></li>
-								</ul>
-							</li>
-							<li><a href="about.html">About Us</a></li>
-							<li><a href="contact.html">Contacts</a></li>
-							<li><a href="#">Advertise</a></li>
-						</ul>
-						<button class="nav-close nav-aside-close"><span></span></button>
-					</div>
+                    <div id="nav-aside">
+                        <ul class="nav-aside-menu">
+							<?php
+								if ( ! empty( $header_menus ) && is_array( $header_menus ) ) {
+									?>
+									<?php
+									foreach ( $header_menus as $menu_item ) {
+										if ( ! $menu_item->menu_item_parent ) {
+											
+											$child_menu_items = get_child_menu_items( $header_menus, $menu_item->ID );
+											$has_children = ! empty( $child_menu_items ) && is_array( $child_menu_items );
+											$has_sub_menu_class = ! empty( $has_children ) ? 'has-submenu' : '';
+											
+											if ( ! $has_children ) {
+												?>
+                                                <li>
+                                                    <a href="<?php echo esc_url( $menu_item->url ); ?>">
+														<?php echo esc_html( $menu_item->title ); ?>
+                                                    </a>
+                                                </li>
+												<?php
+											} else {
+												?>
+                                                <li class="has-dropdown">
+                                                    <a>
+                                                        <?php echo esc_html( $menu_item->title ); ?>
+                                                    </a>
+                                                    <div class="dropdown">
+                                                        <div class="dropdown-body">
+                                                            <ul class="dropdown-list">
+																<?php
+																	foreach ($child_menu_items as $child_menu_item) {
+																		?>
+                                                                        <li>
+                                                                            <a class="dropdown-item"
+                                                                               href="<?php echo esc_url($child_menu_item->url); ?>">
+																				<?php echo $child_menu_item->title ?>
+                                                                            </a>
+                                                                        </li>
+																		<?php
+																	}
+																?>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+												<?php
+											}
+											?>
+											<?php
+										}
+									}
+									?>
+									<?php
+								}
+							?>
+                        </ul>
+                        <button class="nav-close nav-aside-close"><span></span></button>
+                    </div>
 					<!-- /Aside Nav -->
 				</div>
 				<!-- /NAV -->
