@@ -8,7 +8,8 @@
  * @subpackage Twenty_Twenty
  * @since Twenty Twenty 1.0
  */
-
+$header_menu_id = get_menu_id( 'primary' );
+$header_menus = wp_get_nav_menu_items( $header_menu_id );
 ?><!DOCTYPE html>
 
 <html class="no-js" <?php language_attributes(); ?>>
@@ -94,40 +95,58 @@
 
 					<!-- Main Nav -->
 					<div id="nav-bottom">
-						<div class="container">
-							<!-- nav -->
-							<ul class="nav-menu">
-								<li class="has-dropdown">
-									<a href="<?php echo get_option('home'); ?>/">Home</a>
-									<div class="dropdown">
-										<div class="dropdown-body">
-											<?php
-												wp_nav_menu(
-													array(
-														'menu' => 'primary',
-														'container' => '',
-														'theme_location' => 'primary',
-														'items_wrap' => '<ul id="" class="dropdown-list">%3$s</ul>',
-													)
-												);
-											?>
-										</div>
-									</div>
-								</li>
-								<?php
-									wp_nav_menu(
-										array(
-											'menu' => 'primary',
-											'container' => '',
-											'theme_location' => 'primary',
-											'items_wrap' => '<li>%3$s</li>',
-											'depth' => 2,
-										)
-									);
-								?>
-							</ul>
-							<!-- /nav -->
-						</div>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<?php
+								if ( ! empty( $header_menus ) && is_array( $header_menus ) ) {
+									?>
+                                    <ul class="navbar-nav mr-auto">
+										<?php
+											foreach ( $header_menus as $menu_item ) {
+												if ( ! $menu_item->menu_item_parent ) {
+													
+													$child_menu_items = get_child_menu_items( $header_menus, $menu_item->ID );
+													$has_children = ! empty( $child_menu_items ) && is_array( $child_menu_items );
+													$has_sub_menu_class = ! empty( $has_children ) ? 'has-submenu' : '';
+													
+													if ( ! $has_children ) {
+														?>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" href="<?php echo esc_url( $menu_item->url ); ?>">
+																<?php echo esc_html( $menu_item->title ); ?>
+                                                            </a>
+                                                        </li>
+														<?php
+													} else {
+														?>
+                                                        <li class="nav-item dropdown">
+                                                            <a class="nav-link dropdown-toggle" href="<?php echo esc_url( $menu_item->url ); ?>" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																<?php echo esc_html( $menu_item->title ); ?>
+                                                            </a>
+                                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+																<?php
+																	foreach ( $child_menu_items as $child_menu_item ) {
+																		?>
+                                                                        <a class="dropdown-item" href="<?php echo esc_url( $child_menu_item->url ); ?>">
+																			<?php echo esc_html( $child_menu_item->title ); ?>
+                                                                        </a>
+																		<?php
+																	}
+																?>
+                                                            </div>
+                                                        </li>
+														<?php
+													}
+													?>
+													<?php
+												}
+											}
+										?>
+                                    </ul>
+									<?php
+								}
+							?>
+							<?php get_search_form(); ?>
+                        </div>
 					</div>
 					<!-- /Main Nav -->
 
