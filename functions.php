@@ -804,3 +804,60 @@ function twentytwenty_get_elements_array() {
 	
 	add_action('wp_enqueue_scripts', 'register_scripts');
 	
+	function misha_my_load_more_scripts() {
+		
+		global $wp_query;
+		
+		// In most cases it is already included on the page and this line can be removed
+		wp_enqueue_script('jquery');
+		
+		// register our main script but do not enqueue it yet
+		wp_register_script( 'my_loadmore', get_stylesheet_directory_uri() . '/assets/new/js/myloadmore.js', array('jquery') );
+		
+		// now the most interesting part
+		// we have to pass parameters to myloadmore.js script but we can get the parameters values only in PHP
+		// you can define variables directly in your HTML but I decided that the most proper way is wp_localize_script()
+		wp_localize_script( 'my_loadmore', 'misha_loadmore_params', array(
+			'ajaxurl' => site_url() . '/wp-admin/admin-ajax.php', // WordPress AJAX
+			'posts' => json_encode( $wp_query->query_vars ), // everything about your loop is here
+			'current_page' => get_query_var( 'paged' ) ? get_query_var('paged') : 1,
+			'max_page' => $wp_query->max_num_pages
+		) );
+		
+		wp_enqueue_script( 'my_loadmore' );
+	}
+	
+	add_action( 'wp_enqueue_scripts', 'misha_my_load_more_scripts' );
+	
+	function more_post_ajax(){
+		
+		$ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 3;
+		$page = (isset($_POST['pageNumber'])) ? $_POST['pageNumber'] : 0;
+		
+		header("Content-Type: text/html");
+		
+		$args = array(
+			'suppress_filters' => true,
+			'post_type' => 'post',
+			'posts_per_page' => $ppp,
+			'paged'    => $page,
+		);
+		
+		$loop = new WP_Query($args);
+		
+		$out = '';
+		
+		if ($loop -> have_posts()) :  while ($loop -> have_posts()) : $loop -> the_post();
+			$out .= '<div class="small-12 large-4 columns">
+                <h1>'.get_the_title().'</h1>
+                <p>'.get_the_content().'</p>
+         </div>';
+		
+		endwhile;
+		endif;
+		wp_reset_postdata();
+		die($out);
+	}
+	
+	add_action('wp_ajax_nopriv_more_post_ajax', 'more_post_ajax');
+	add_action('wp_ajax_more_post_ajax', 'more_post_ajax');
