@@ -36,7 +36,8 @@
                                     <ul class="post-meta">
                                         <li>
                                             <a href="<?php the_permalink(); ?>"><?php
-			                                        echo(get_field('author_field')->post_title);
+		                                            $author_field = get_field('author_field');
+			                                        echo( $author_field->post_title);
 		                                        ?></a>
                                         </li>
                                         <li><?php echo get_the_date('j F Y'); ?></li>
@@ -96,7 +97,7 @@
                                                         href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                                             <ul class="post-meta">
                                                 <li>
-                                                    <a href="<?php the_permalink(); ?>"><?php echo(get_field('author_field')->post_title); ?></a>
+                                                    <a href="<?php the_permalink(); ?>"><?php echo($author_field->post_title); ?></a>
                                                 </li>
                                                 <li><?php echo get_the_date('j F Y'); ?></li>
                                             </ul>
@@ -154,7 +155,7 @@
                                             </h3>
                                             <ul class="post-meta">
                                                 <li>
-                                                    <a href="<?php the_permalink(); ?>"><?php echo(get_field('author_field')->post_title); ?></a>
+                                                    <a href="<?php the_permalink(); ?>"><?php echo($author_field->post_title); ?></a>
                                                 </li>
                                                 <li><?php echo get_the_date('j F Y'); ?></li>
                                             </ul>
@@ -203,7 +204,7 @@
                                             </h3>
                                             <ul class="post-meta">
                                                 <li>
-                                                    <a href="<?php the_permalink(); ?>"><?php echo(get_field('author_field')->post_title); ?></a>
+                                                    <a href="<?php the_permalink(); ?>"><?php echo($author_field->post_title); ?></a>
                                                 </li>
                                                 <li><?php echo get_the_date('j F Y'); ?></li>
                                             </ul>
@@ -290,7 +291,7 @@
                                     </h3>
                                     <ul class="post-meta">
                                         <li>
-                                            <a href="<?php the_permalink(); ?>"><?php echo(get_field('author_field')->post_title); ?></a>
+                                            <a href="<?php the_permalink(); ?>"><?php echo($author_field->post_title); ?></a>
                                         </li>
                                         <li><?php echo get_the_date('j F Y'); ?></li>
                                     </ul>

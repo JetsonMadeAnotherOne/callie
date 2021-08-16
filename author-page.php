@@ -20,20 +20,21 @@ get_header();
                     </p>
                     <ul class="author-social">
 	                    <?php
-		                    $linkFacebook = get_fields(get_field('author_field', $post_id)->ID)["facebook-link"];
-		                    if ( strlen($linkFacebook) > 0 ) {
+		                    $author_field_arr = get_fields(get_field('author_field', $post_id)->ID);
+		                    $linkFacebook = $author_field_arr["facebook-link"];
+		                    if ($linkFacebook) {
 			                    echo '<li><a href='.$linkFacebook.'><i class="fa fa-facebook"></i></a></li>';
 		                    }
-		                    $linkTwitter = get_fields(get_field('author_field', $post_id)->ID)["twitter-link"];
-		                    if ( strlen($linkTwitter) > 0 ) {
+		                    $linkTwitter = $author_field_arr["twitter-link"];
+		                    if ($linkTwitter) {
 			                    echo '<li><a href='.$linkTwitter.'><i class="fa fa-twitter"></i></a></li>';
 		                    }
-		                    $linkGooglePlus = get_fields(get_field('author_field', $post_id)->ID)["google-plus-link"];
-		                    if ( strlen($linkGooglePlus) > 0 ) {
+		                    $linkGooglePlus = $author_field_arr["google-plus-link"];
+		                    if ($linkGooglePlus) {
 			                    echo '<li><a href='.$linkGooglePlus.'><i class="fa fa-google-plus"></i></a></li>';
 		                    }
-		                    $linkInstagram = get_fields(get_field('author_field', $post_id)->ID)["instagram-link"];
-		                    if ( strlen($linkInstagram) > 0 ) {
+		                    $linkInstagram = $author_field_arr["instagram-link"];
+		                    if ($linkInstagram) {
 			                    echo '<li><a href='.$linkInstagram.'><i class="fa fa-instagram"></i></a></li>';
 		                    }
 	                    ?>
@@ -51,6 +52,7 @@ get_header();
         <div class="row">
             <div class="col-md-8">
 	            <?php
+                    $author_field = get_field('author_field');
 		            $args = array(
 			            'post_type' => 'post',
 			            'posts_per_page' => 9,
@@ -59,7 +61,7 @@ get_header();
 		
 		            foreach ($lastposts as $post) {
 			            setup_postdata($post);
-			            if (get_field('author_field')->post_title == 'Author1') :
+			            if ($author_field->post_title == 'Author1') :
 				            ?>
                             <div class="post post-row">
                                 <a class="post-img" href="<?php the_permalink(); ?>">
@@ -76,7 +78,7 @@ get_header();
                                     </h3>
                                     <ul class="post-meta">
                                         <li>
-                                            <a href="<?php the_permalink(); ?>"><?php echo(get_field('author_field')->post_title); ?></a>
+                                            <a href="<?php the_permalink(); ?>"><?php echo($author_field->post_title); ?></a>
                                         </li>
                                         <li><?php echo get_the_date('j F Y'); ?></li>
                                     </ul>

@@ -35,19 +35,19 @@ $header_menus = wp_get_nav_menu_items( $header_menu_id );
 							<ul class="nav-social">
                                 <?php
                                 $linkFacebook = get_theme_mod('Facebook link');
-                                if ( strlen($linkFacebook) > 0 ) {
+                                if ($linkFacebook) {
                                     echo '<li><a href='.$linkFacebook.'><i class="fa fa-facebook"></i></a></li>';
                                 }
                                 $linkTwitter = get_theme_mod('Twitter link');
-                                if ( strlen($linkTwitter) > 0 ) {
+                                if ($linkFacebook) {
                                     echo '<li><a href='.$linkTwitter.'><i class="fa fa-twitter"></i></a></li>';
                                 }
                                 $linkGooglePlus = get_theme_mod('GooglePlusLink');
-                                if ( strlen($linkGooglePlus) > 0 ) {
+                                if ($linkGooglePlus) {
                                     echo '<li><a href='.$linkGooglePlus.'><i class="fa fa-google-plus"></i></a></li>';
                                 }
                                 $linkInstagram = get_theme_mod('Instagram Link');
-                                if ( strlen($linkInstagram) > 0 ) {
+                                if ($linkInstagram) {
                                     echo '<li><a href='.$linkInstagram.'><i class="fa fa-instagram"></i></a></li>';
                                 }
                                 ?>

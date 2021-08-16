@@ -31,7 +31,7 @@
                         ?>/" class="logo">
                             <?php
                             $footerLogo = get_theme_mod('Footer logo');
-                            if (strlen($footerLogo) > 0) {
+                            if ($footerLogo) {
                                 echo '<img class="footer-logo" src="' . $footerLogo . '" alt="logo">';
                             }
                             ?>
@@ -40,21 +40,21 @@
                     <p><?php echo get_theme_mod('Footer text'); ?></p>
                     <ul class="contact-social">
                         <?php
-                        $link = get_theme_mod('Facebook link');
-                        if (strlen($link) > 0) {
-                            echo '<li><a class="social-facebook" href=' . $link . '><i class="fa fa-facebook"></i></a></li>';
+                        $linkFacebook = get_theme_mod('Facebook link');
+                        if ($linkFacebook) {
+                            echo '<li><a class="social-facebook" href=' . $linkFacebook . '><i class="fa fa-facebook"></i></a></li>';
                         }
-                        $link2 = get_theme_mod('Twitter link');
-                        if (strlen($link2) > 0) {
-                            echo '<li><a class="social-twitter" href=' . $link2 . '><i class="fa fa-twitter"></i></a></li>';
+                        $linkTwitter = get_theme_mod('Twitter link');
+                        if ($linkTwitter) {
+                            echo '<li><a class="social-twitter" href=' . $linkTwitter . '><i class="fa fa-twitter"></i></a></li>';
                         }
-                        $link3 = get_theme_mod('GooglePlusLink');
-                        if (strlen($link3) > 0) {
-                            echo '<li><a class="social-google-plus" href=' . $link3 . '><i class="fa fa-google-plus"></i></a></li>';
+                        $linkGoogle = get_theme_mod('GooglePlusLink');
+                        if ($linkGoogle) {
+                            echo '<li><a class="social-google-plus" href=' . $linkGoogle . '><i class="fa fa-google-plus"></i></a></li>';
                         }
-                        $link4 = get_theme_mod('Instagram Link');
-                        if (strlen($link4) > 0) {
-                            echo '<li><a class="social-instagram" href=' . $link4 . '><i class="fa fa-instagram"></i></a></li>';
+                        $linkInstagram = get_theme_mod('Instagram Link');
+                        if ($linkInstagram) {
+                            echo '<li><a class="social-instagram" href=' . $linkInstagram . '><i class="fa fa-instagram"></i></a></li>';
                         }
                         ?>
                     </ul>

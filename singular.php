@@ -103,16 +103,16 @@ get_header();
                 <!-- post author -->
                 <div class="section-row">
                     <div class="section-title">
-                        <h3 class="title">About <a href="author.html"><?php echo(get_field('author_field')->post_title); ?></a></h3>
+                        <h3 class="title">About <a href="author.html"><?php $author_field = get_field('author_field'); echo($author_field->post_title); ?></a></h3>
                     </div>
                     <div class="author media">
                         <div class="media-left">
-                            <img class="author-img media-object" src='<?php echo get_the_post_thumbnail_url(get_field('author_field')->ID); ?>' alt="">
+                            <img class="author-img media-object" src='<?php echo get_the_post_thumbnail_url($author_field->ID); ?>' alt="">
                         </div>
-                        <div class="media-body">
+                        <div class="media-body" style="background: red !important;">
                             <p>
 		                        <?php
-			                        $my_postid = get_field('author_field')->ID;
+			                        $my_postid = $author_field->ID;
 			                        $content_post = get_post($my_postid);
 			                        $content = $content_post->post_content;
 			                        echo $content;
@@ -120,20 +120,21 @@ get_header();
                             </p>
                             <ul class="author-social">
                                 <?php
-	                                $linkFacebook = get_fields(get_field('author_field')->ID)["facebook-link"];
-	                                if ( strlen($linkFacebook) > 0 ) {
+                                    $author_field_arr = get_fields($author_field->ID);
+	                                $linkFacebook = $author_field_arr["facebook-link"];
+	                                if ($linkFacebook) {
 		                                echo '<li><a href='.$linkFacebook.'><i class="fa fa-facebook"></i></a></li>';
 	                                }
-	                                $linkTwitter = get_fields(get_field('author_field')->ID)["twitter-link"];
-	                                if ( strlen($linkTwitter) > 0 ) {
+	                                $linkTwitter = $author_field_arr["twitter-link"];
+	                                if ($linkTwitter) {
 		                                echo '<li><a href='.$linkTwitter.'><i class="fa fa-twitter"></i></a></li>';
 	                                }
-	                                $linkGooglePlus = get_fields(get_field('author_field')->ID)["google-plus-link"];
-	                                if ( strlen($linkGooglePlus) > 0 ) {
+	                                $linkGooglePlus = $author_field_arr["google-plus-link"];
+	                                if ($linkGooglePlus) {
 		                                echo '<li><a href='.$linkGooglePlus.'><i class="fa fa-google-plus"></i></a></li>';
 	                                }
-	                                $linkInstagram = get_fields(get_field('author_field')->ID)["instagram-link"];
-	                                if ( strlen($linkInstagram) > 0 ) {
+	                                $linkInstagram = $author_field_arr["instagram-link"];
+	                                if ($linkGooglePlus) {
 		                                echo '<li><a href='.$linkInstagram.'><i class="fa fa-instagram"></i></a></li>';
 	                                }
                                 ?>
@@ -179,7 +180,7 @@ get_header();
                                                         href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                             </h3>
                                             <ul class="post-meta">
-                                                <li><a href="<?php the_permalink(); ?>"><?php echo(get_field('author_field')->post_title); ?></a></li>
+                                                <li><a href="<?php the_permalink(); ?>"><?php echo($author_field->post_title); ?></a></li>
                                                 <li><?php echo get_the_date('j F Y'); ?></li>
                                             </ul>
                                         </div>
