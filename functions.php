@@ -40,11 +40,18 @@ function widget_areas()
             'after_title' => '</h3>',
             'before_widget' => '<li>',
             'after_widget' => '</li>',
-            'name' => 'Footer Area',
+            'name' => 'Sidebar Area',
             'id' => 'test-1',
             'description' => 'Test Area'
         )
     );
+	register_sidebar(
+		array(
+			'name' => 'Sidebar Area',
+			'id' => 'test-2',
+			'description' => 'Test Area2'
+		)
+	);
 }
 
 add_action('widgets_init', 'widget_areas');
@@ -873,11 +880,9 @@ function twentytwenty_get_elements_array() {
 	
 	function get_child_menu_items($menu_array, $parent_id)
 	{
-		
 		$child_menus = [];
 		
 		if (!empty($menu_array) && is_array($menu_array)) {
-			
 			foreach ($menu_array as $menu) {
 				if (intval($menu->menu_item_parent) === $parent_id) {
 					array_push($child_menus, $menu);
@@ -890,7 +895,6 @@ function twentytwenty_get_elements_array() {
 	
 	function get_menu_id($location)
 	{
-		
 		// Get all locations
 		$locations = get_nav_menu_locations();
 		
@@ -898,5 +902,211 @@ function twentytwenty_get_elements_array() {
 		$menu_id = !empty($locations[$location]) ? $locations[$location] : '';
 		
 		return !empty($menu_id) ? $menu_id : '';
-		
 	}
+	
+	
+	
+class trueTopPostsWidget extends WP_Widget {
+	
+	/*
+	 * создание виджета
+	 */
+	function __construct() {
+		parent::__construct(
+			'true_top_widget',
+			'Популярные посты', // заголовок виджета
+			array( 'description' => 'Позволяет вывести посты, отсортированные по количеству комментариев в них.' ) // описание
+		);
+	}
+	
+	/*
+	 * фронтэнд виджета
+	 */
+	public function widget( $args, $instance ) {
+		$title = apply_filters( 'widget_title', $instance['title'] ); // к заголовку применяем фильтр (необязательно)
+		$posts_per_page = $instance['posts_per_page'];
+		
+		if ( ! empty( $title ) ) : ?>
+            <div class="section-title">
+                <h2 class="title"><?php echo $title; ?></h2>
+            </div>
+        <?php endif;
+		$q = new WP_Query("posts_per_page=$posts_per_page&orderby=comment_count");
+		if( $q->have_posts() ):
+			?>
+                <?php
+			while( $q->have_posts() ): $q->the_post();
+				?>
+                <div class="post post-widget">
+                    <a class="post-img" href="<?php the_permalink(); ?>">
+						<?php if (has_post_thumbnail()) : ?>
+                            <img src="<?php the_post_thumbnail_url(); ?>">
+						<?php endif; ?>
+                    </a>
+                    <div class="post-body">
+                        <div class="post-category">
+							<?php the_category(' '); ?>
+                        </div>
+                        <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                        </h3>
+                    </div>
+                </div>
+            <?php
+			endwhile;
+			?>
+        <?php
+		endif;
+		wp_reset_postdata();
+		
+		echo $args['after_widget'];
+	}
+	
+	/*
+	 * бэкэнд виджета
+	 */
+	public function form( $instance ) {
+		if ( isset( $instance[ 'title' ] ) ) {
+			$title = $instance[ 'title' ];
+		}
+		if ( isset( $instance[ 'posts_per_page' ] ) ) {
+			$posts_per_page = $instance[ 'posts_per_page' ];
+		}
+		?>
+        <p>
+            <label for="<?php echo $this->get_field_id( 'title' ); ?>">Заголовок</label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>">Количество постов:</label>
+            <input id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" type="text" value="<?php echo ($posts_per_page) ? esc_attr( $posts_per_page ) : '5'; ?>" size="3" />
+        </p>
+		<?php
+	}
+	
+	/*
+	 * сохранение настроек виджета
+	 */
+	public function update( $new_instance, $old_instance ) {
+		$instance = array();
+		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+		$instance['posts_per_page'] = ( is_numeric( $new_instance['posts_per_page'] ) ) ? $new_instance['posts_per_page'] : '5'; // по умолчанию выводятся 5 постов
+		return $instance;
+	}
+}
+	
+	class categoriesWidget extends WP_Widget {
+		
+		/*
+		 * создание виджета
+		 */
+		function __construct() {
+			parent::__construct(
+				'true_top_widget2',
+				'Categories11', // заголовок виджета
+				array( 'description' => 'Categories' ) // описание
+			);
+		}
+		
+		/*
+		 * фронтэнд виджета
+		 */
+		public function widget( $args, $instance ) {
+			$title = apply_filters( 'widget_title', $instance['title'] ); // к заголовку применяем фильтр (необязательно)
+			$posts_per_page = $instance['posts_per_page'];
+			
+			if ( ! empty( $title ) ) : ?>
+                <div class="section-title">
+                    <h2 class="title"><?php echo $title; ?></h2>
+                </div>
+			<?php endif;
+			$q = new WP_Query("posts_per_page=$posts_per_page&orderby=comment_count");
+			if( $q->have_posts() ):
+				?>
+				<?php
+				while( $q->have_posts() ): $q->the_post();
+					?>
+                    <div class="post post-widget">
+                        <a class="post-img" href="<?php the_permalink(); ?>">
+							<?php if (has_post_thumbnail()) : ?>
+                                <img src="<?php the_post_thumbnail_url(); ?>">
+							<?php endif; ?>
+                        </a>
+                        <div class="post-body">
+                            <div class="post-category">
+								<?php the_category(' '); ?>
+                            </div>
+                            <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                            </h3>
+                        </div>
+                    </div>
+				<?php
+				endwhile;
+				?>
+			<?php
+			endif;
+			wp_reset_postdata();
+			
+			echo $args['after_widget'];
+		}
+		
+		/*
+		 * бэкэнд виджета
+		 */
+		public function form( $instance ) {
+			if ( isset( $instance[ 'title' ] ) ) {
+				$title = $instance[ 'title' ];
+			}
+			if ( isset( $instance[ 'posts_per_page' ] ) ) {
+				$posts_per_page = $instance[ 'posts_per_page' ];
+			}
+			?>
+            <p>
+                <label for="<?php echo $this->get_field_id( 'title' ); ?>">Заголовок</label>
+                <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+            </p>
+            <p>
+                <label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>">Количество постов:</label>
+                <input id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" type="text" value="<?php echo ($posts_per_page) ? esc_attr( $posts_per_page ) : '5'; ?>" size="3" />
+            </p>
+			<?php
+		}
+		
+		/*
+		 * сохранение настроек виджета
+		 */
+		public function update( $new_instance, $old_instance ) {
+			$instance = array();
+			$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+			$instance['posts_per_page'] = ( is_numeric( $new_instance['posts_per_page'] ) ) ? $new_instance['posts_per_page'] : '5'; // по умолчанию выводятся 5 постов
+			return $instance;
+		}
+	}
+	
+	function categoriesWidget_load() {
+		register_widget( 'categoriesWidget' );
+	}
+	
+	function true_top_posts_widget_load() {
+		register_widget( 'trueTopPostsWidget' );
+	}
+	
+	add_action( 'widgets_init', 'true_top_posts_widget_load' );
+	add_action( 'widgets_init', 'categoriesWidget_load' );
+	
+	
+	function true_remove_default_widget() {
+		unregister_widget('WP_Widget_Archives'); // Архивы
+		unregister_widget('WP_Widget_Calendar'); // Календарь
+		unregister_widget('WP_Widget_Categories'); // Рубрики
+		unregister_widget('WP_Widget_Meta'); // Мета
+		unregister_widget('WP_Widget_Pages'); // Страницы
+		unregister_widget('WP_Widget_Recent_Comments'); // Свежие комментарии
+		unregister_widget('WP_Widget_Recent_Posts'); // Свежие записи
+		unregister_widget('WP_Widget_RSS'); // RSS
+		unregister_widget('WP_Widget_Search'); // Поиск
+		unregister_widget('WP_Widget_Tag_Cloud'); // Облако меток
+		unregister_widget('WP_Widget_Text'); // Текст
+		unregister_widget('WP_Nav_Menu_Widget'); // Произвольное меню
+	}
+	
+	add_action( 'widgets_init', 'true_remove_default_widget', 20 );

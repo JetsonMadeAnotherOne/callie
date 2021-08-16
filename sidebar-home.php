@@ -37,17 +37,9 @@
 	
 	<!-- category widget -->
 	<div class="aside-widget">
-		<div class="section-title">
-			<h2 class="title">Categories</h2>
-		</div>
-		<div class="category-widget">
-			<?php
-				$categories = get_categories();
-				foreach ($categories as $category) {
-					echo '<ul><li><a href="' . get_category_link($category->term_id) . '">' . $category->name . '<span>' . '</span></a></li></ul>';
-				}
-			?>
-		</div>
+		<?php
+			dynamic_sidebar('test-2');
+		?>
 	</div>
 	<!-- /category widget -->
 	
@@ -65,35 +57,8 @@
 	
 	<!-- post widget -->
 	<div class="aside-widget">
-		<div class="section-title">
-			<h2 class="title">Popular Posts</h2>
-		</div>
 		<?php
-			$args = array(
-				'posts_per_page' => 5,
-			);
-			$lastposts = get_posts($args);
-			
-			foreach ($lastposts as $post) {
-				setup_postdata($post);
-				?>
-				<div class="post post-widget">
-					<a class="post-img" href="<?php the_permalink(); ?>">
-						<?php if (has_post_thumbnail()) : ?>
-							<img src="<?php the_post_thumbnail_url(); ?>">
-						<?php endif; ?>
-					</a>
-					<div class="post-body">
-						<div class="post-category">
-							<?php the_category(' '); ?>
-						</div>
-						<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-						</h3>
-					</div>
-				</div>
-				<?php
-			}
-			wp_reset_postdata();
+			dynamic_sidebar('test-1');
 		?>
 	</div>
 </div>
