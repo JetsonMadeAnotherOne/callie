@@ -1,5 +1,5 @@
 jQuery(function ($) {
-    const ppp = 4;
+    const ppp = 3;
     let pageNumber = 1;
 
     function load_posts() {
@@ -10,12 +10,16 @@ jQuery(function ($) {
             dataType: "html",
             url: ajax_posts.ajaxurl,
             data: str,
-            success: function (data) {
+            success: (data) => {
                 var $data = $(data);
+                if ($data.length === 1) {
+                    $("#more_posts").remove();
+                }
                 if ($data.length) {
                     $("#ajax-posts").append($data);
                     $("#more_posts").attr("disabled", true);
-                } else {
+                }
+                else {
                     $("#more_posts").remove();
                 }
             },
