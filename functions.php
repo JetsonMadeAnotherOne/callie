@@ -52,6 +52,13 @@ function widget_areas()
 			'description' => 'Test Area2'
 		)
 	);
+	register_sidebar(
+		array(
+			'name' => 'Sidebar Area',
+			'id' => 'test-3',
+			'description' => 'Test Area3'
+		)
+	);
 }
 
 add_action('widgets_init', 'widget_areas');
@@ -904,7 +911,7 @@ function twentytwenty_get_elements_array() {
 		return !empty($menu_id) ? $menu_id : '';
 	}
 	
-	
+	add_filter('widget_text','do_shortcode');
 	
 class trueTopPostsWidget extends WP_Widget {
 	
@@ -1052,7 +1059,81 @@ class trueTopPostsWidget extends WP_Widget {
 			return $instance;
 		}
 	}
+	//
 	
+	
+	class newsletterSubscriptonWidget extends WP_Widget {
+		
+		/*
+		 * создание виджета
+		 */
+		function __construct() {
+			parent::__construct(
+				'subscriptonWidget',
+				'Newsletter Subscription', // заголовок виджета_
+				array( 'description' => 'Newsletter Subscription Widget' ) // описание
+			);
+		}
+		
+		/*
+		 * фронтэнд виджета
+		 */
+		public function widget( $args, $instance ) {
+			$title = apply_filters( 'widget_title', $instance['title'] ); // к заголовку применяем фильтр (необязательно)
+			$contact_form = $instance['contact_form'];
+			
+			if ( ! empty( $title ) ) : ?>
+                <div class="section-title">
+                    <h2 class="title"><?php echo $title; ?></h2>
+                </div>
+			<?php endif;
+			?>
+            <div class="newsletter-widget">
+                <p>Nec feugiat nisl pretium fusce id velit ut tortor pretium.</p>
+				<?php echo do_shortcode("$contact_form"); ?>
+            </div>
+			<?php
+		}
+		
+		/*
+		 * бэкэнд виджета
+		 */
+		public function form( $instance ) {
+			if ( isset( $instance[ 'title' ] ) ) {
+				$title = $instance[ 'title' ];
+			}
+			if ( isset( $instance[ 'contact_form' ] ) ) {
+				$contact_form = $instance[ 'contact_form' ];
+			}
+			?>
+            <p>
+                <label for="<?php echo $this->get_field_id( 'title' ); ?>">Заголовок</label>
+                <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+            </p>
+            <p>
+                <label for="<?php echo $this->get_field_id( 'contact_form' ); ?>">Place your shortcode for contact form here:</label>
+                <input id="<?php echo $this->get_field_id( 'contact_form' ); ?>" name="<?php echo $this->get_field_name( 'contact_form' ); ?>" type="text" value="<?php echo ($contact_form) ? esc_attr( $contact_form ) : '' ?>" size="3" />
+            </p>
+			<?php
+		}
+		
+		/*
+		 * сохранение настроек виджета
+		 */
+		public function update( $new_instance, $old_instance ) {
+			$instance = array();
+			$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+			$instance['contact_form'] = ( ! empty( $new_instance['contact_form'] ) ) ? strip_tags( $new_instance['contact_form'] ) : '';
+			return $instance;
+		}
+	}
+	//
+	
+    
+    function newsletterSubscriptonWidget_load() {
+	    register_widget( 'newsletterSubscriptonWidget' );
+    }
+    
 	function categoriesWidget_load() {
 		register_widget( 'categoriesWidget' );
 	}
@@ -1063,6 +1144,7 @@ class trueTopPostsWidget extends WP_Widget {
 	
 	add_action( 'widgets_init', 'true_top_posts_widget_load' );
 	add_action( 'widgets_init', 'categoriesWidget_load' );
+	add_action( 'widgets_init', 'newsletterSubscriptonWidget_load' );
 	
 	
 	function true_remove_default_widget() {

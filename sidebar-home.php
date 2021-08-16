@@ -45,13 +45,9 @@
 	
 	<!-- newsletter widget -->
 	<div class="aside-widget">
-		<div class="section-title">
-			<h2 class="title">Newsletter</h2>
-		</div>
-		<div class="newsletter-widget">
-			<p>Nec feugiat nisl pretium fusce id velit ut tortor pretium.</p>
-			<?php echo do_shortcode('[contact-form-7 id="27" title="Контактная форма 1"]'); ?>
-		</div>
+		<?php
+			dynamic_sidebar('test-3');
+		?>
 	</div>
 	<!-- /newsletter widget -->
 	
