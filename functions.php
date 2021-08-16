@@ -1002,7 +1002,7 @@ class trueTopPostsWidget extends WP_Widget {
 		function __construct() {
 			parent::__construct(
 				'true_top_widget2',
-				'Categories11', // заголовок виджета
+				'Categories112', // заголовок виджета
 				array( 'description' => 'Categories' ) // описание
 			);
 		}
@@ -1012,41 +1012,20 @@ class trueTopPostsWidget extends WP_Widget {
 		 */
 		public function widget( $args, $instance ) {
 			$title = apply_filters( 'widget_title', $instance['title'] ); // к заголовку применяем фильтр (необязательно)
-			$posts_per_page = $instance['posts_per_page'];
-			
-			if ( ! empty( $title ) ) : ?>
+			if (!empty($title)) : ?>
                 <div class="section-title">
                     <h2 class="title"><?php echo $title; ?></h2>
                 </div>
 			<?php endif;
-			$q = new WP_Query("posts_per_page=$posts_per_page&orderby=comment_count");
-			if( $q->have_posts() ):
+			?>
+            <div class="category-widget"> <?php
+					$categories = get_categories();
+					foreach ($categories as $category) {
+						echo '<ul><li><a href="' . get_category_link($category->term_id) . '">' . $category->name . '<span>' . '</span></a></li></ul>';
+					}
 				?>
-				<?php
-				while( $q->have_posts() ): $q->the_post();
-					?>
-                    <div class="post post-widget">
-                        <a class="post-img" href="<?php the_permalink(); ?>">
-							<?php if (has_post_thumbnail()) : ?>
-                                <img src="<?php the_post_thumbnail_url(); ?>">
-							<?php endif; ?>
-                        </a>
-                        <div class="post-body">
-                            <div class="post-category">
-								<?php the_category(' '); ?>
-                            </div>
-                            <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                            </h3>
-                        </div>
-                    </div>
-				<?php
-				endwhile;
-				?>
+            </div>
 			<?php
-			endif;
-			wp_reset_postdata();
-			
-			echo $args['after_widget'];
 		}
 		
 		/*
@@ -1056,17 +1035,10 @@ class trueTopPostsWidget extends WP_Widget {
 			if ( isset( $instance[ 'title' ] ) ) {
 				$title = $instance[ 'title' ];
 			}
-			if ( isset( $instance[ 'posts_per_page' ] ) ) {
-				$posts_per_page = $instance[ 'posts_per_page' ];
-			}
 			?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>">Заголовок</label>
                 <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
-            </p>
-            <p>
-                <label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>">Количество постов:</label>
-                <input id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" type="text" value="<?php echo ($posts_per_page) ? esc_attr( $posts_per_page ) : '5'; ?>" size="3" />
             </p>
 			<?php
 		}
@@ -1077,7 +1049,6 @@ class trueTopPostsWidget extends WP_Widget {
 		public function update( $new_instance, $old_instance ) {
 			$instance = array();
 			$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-			$instance['posts_per_page'] = ( is_numeric( $new_instance['posts_per_page'] ) ) ? $new_instance['posts_per_page'] : '5'; // по умолчанию выводятся 5 постов
 			return $instance;
 		}
 	}
