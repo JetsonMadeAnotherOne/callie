@@ -121,12 +121,13 @@
         <div class="container">
             <!-- row -->
 	        <?php
+		        $categories = get_categories();
 		        for ($i = 0; $i < 3; $i++) {
 			        ?>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="section-title">
-                                <h2 class="title"><? $categories = get_categories(); echo $categories[$i]->name; ?></h2>
+                                <h2 class="title"><? echo $categories[$i]->name; ?></h2>
                             </div>
                         </div>
 				        <?php
@@ -177,7 +178,7 @@
 			        ?>
                         <div class="col-md-4">
                             <div class="section-title">
-                                <h2 class="title"><? $categories = get_categories(); echo $categories[$i]->name; ?></h2>
+                                <h2 class="title"><? echo $categories[$i]->name; ?></h2>
                             </div>
 					        <?php
 						        $args = array(

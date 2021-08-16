@@ -109,13 +109,10 @@ get_header();
                         <div class="media-left">
                             <img class="author-img media-object" src='<?php echo get_the_post_thumbnail_url($author_field->ID); ?>' alt="">
                         </div>
-                        <div class="media-body" style="background: red !important;">
+                        <div class="media-body">
                             <p>
 		                        <?php
-			                        $my_postid = $author_field->ID;
-			                        $content_post = get_post($my_postid);
-			                        $content = $content_post->post_content;
-			                        echo $content;
+			                        echo apply_filters( 'the_content', $author_field->post_content );
 		                        ?>
                             </p>
                             <ul class="author-social">

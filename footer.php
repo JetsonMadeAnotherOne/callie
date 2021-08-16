@@ -21,21 +21,29 @@
             <div class="col-md-3">
                 <div class="footer-widget">
                     <div class="footer-logo">
-                        <a href="<?php
-	                        if (!is_home()) {
-		                        echo get_option('home');
-	                        }
-	                        else {
-		                        echo '#';
-	                        }
-                        ?>/" class="logo">
+	                    <?php
+		                    $home = get_option("home");
+		                    if (!is_home()) {
+			                    echo '<a class="logo" href="'.$home.'">';
+		                    }
+		                    else {
+			                    echo '<div class="logo">';
+		                    }
+	                    ?>
                             <?php
                             $footerLogo = get_theme_mod('Footer logo');
                             if ($footerLogo) {
                                 echo '<img class="footer-logo" src="' . $footerLogo . '" alt="logo">';
                             }
                             ?>
-                        </a>
+	                    <?php
+		                    if (!is_home()) {
+			                    echo '</a>';
+		                    }
+		                    else {
+			                    echo '</div>';
+		                    }
+	                    ?>
                     </div>
                     <p><?php echo get_theme_mod('Footer text'); ?></p>
                     <ul class="contact-social">

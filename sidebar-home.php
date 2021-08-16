@@ -83,7 +83,6 @@
 							<img src="<?php the_post_thumbnail_url(); ?>">
 						<?php endif; ?>
 					</a>
-					
 					<div class="post-body">
 						<div class="post-category">
 							<?php the_category(' '); ?>

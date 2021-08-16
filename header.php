@@ -56,14 +56,16 @@ $header_menus = wp_get_nav_menu_items( $header_menu_id );
 
 							<!-- logo -->
 							<div class="nav-logo">
-                                <a class="logo" href="<?php
-									if (!is_home()) {
-										echo get_option('home');
-									}
-									else {
-									    echo '#';
+                                <?php
+                                    $home = get_option("home");
+	                                if (!is_home()) {
+		                               echo '<a class="logo" href="'.$home.'/">';
+	                                }
+	                                else {
+		                                echo '<div class="logo">';
                                     }
-									?>/">
+                                ?>
+                                
 									<?php
 										$custom_logo_id = get_theme_mod( 'custom_logo' );
 										$logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
@@ -71,8 +73,15 @@ $header_menus = wp_get_nav_menu_items( $header_menu_id );
 											echo '<img src="'. esc_url( $logo[0] ) .'" alt="logo">';
 										}
 									?>
-                                
-                                </a>
+
+                                <?php
+	                                if (!is_home()) {
+		                                echo '</a>';
+	                                }
+	                                else {
+		                                echo '</div>';
+	                                }
+                                ?>
 							</div>
 
 							<!-- search & aside toggle -->
