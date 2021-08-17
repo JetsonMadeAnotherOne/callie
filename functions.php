@@ -36,36 +36,11 @@ function widget_areas()
 {
     register_sidebar(
         array(
-            'before_title' => '<h3 class="footer-title">',
-            'after_title' => '</h3>',
-            'before_widget' => '<li>',
-            'after_widget' => '</li>',
             'name' => 'Sidebar Area',
             'id' => 'test-1',
             'description' => 'Test Area'
         )
     );
-	register_sidebar(
-		array(
-			'name' => 'Sidebar Area',
-			'id' => 'test-2',
-			'description' => 'Test Area2'
-		)
-	);
-	register_sidebar(
-		array(
-			'name' => 'Sidebar Area',
-			'id' => 'test-3',
-			'description' => 'Test Area3'
-		)
-	);
-	register_sidebar(
-		array(
-			'name' => 'Sidebar Area',
-			'id' => 'test-4',
-			'description' => 'Test Area4'
-		)
-	);
 }
 
 add_action('widgets_init', 'widget_areas');
@@ -928,7 +903,7 @@ class trueTopPostsWidget extends WP_Widget {
 	public function widget( $args, $instance ) {
 		$title = apply_filters( 'widget_title', $instance['title'] ); // к заголовку применяем фильтр (необязательно)
 		$posts_per_page = $instance['posts_per_page'];
-		
+		?> <div class="aside-widget"> <?php
 		if ( ! empty( $title ) ) : ?>
             <div class="section-title">
                 <h2 class="title"><?php echo $title; ?></h2>
@@ -957,11 +932,11 @@ class trueTopPostsWidget extends WP_Widget {
             <?php
 			endwhile;
 			?>
+            </div>
         <?php
 		endif;
 		wp_reset_postdata();
 		
-		echo $args['after_widget'];
 	}
 	
 	/*
@@ -1013,20 +988,24 @@ class trueTopPostsWidget extends WP_Widget {
 		/*
 		 * фронтэнд виджета
 		 */
-		public function widget( $args, $instance ) {
-			$title = apply_filters( 'widget_title', $instance['title'] ); // к заголовку применяем фильтр (необязательно)
-			if (!empty($title)) : ?>
-                <div class="section-title">
-                    <h2 class="title"><?php echo $title; ?></h2>
-                </div>
-			<?php endif;
+		public function widget($args, $instance)
+		{
+			$title = apply_filters('widget_title', $instance['title']); // к заголовку применяем фильтр (необязательно)
 			?>
-            <div class="category-widget"> <?php
-					$categories = get_categories();
-					foreach ($categories as $category) {
-						echo '<ul><li><a href="' . get_category_link($category->term_id) . '">' . $category->name . '<span>' . '</span></a></li></ul>';
-					}
+            <div class="aside-widget"> <?php
+					if (!empty($title)) : ?>
+                        <div class="section-title">
+                            <h2 class="title"><?php echo $title; ?></h2>
+                        </div>
+					<?php endif;
 				?>
+                <div class="category-widget"> <?php
+						$categories = get_categories();
+						foreach ($categories as $category) {
+							echo '<ul><li><a href="' . get_category_link($category->term_id) . '">' . $category->name . '<span>' . '</span></a></li></ul>';
+						}
+					?>
+                </div>
             </div>
 			<?php
 		}
@@ -1077,16 +1056,18 @@ class trueTopPostsWidget extends WP_Widget {
 		public function widget( $args, $instance ) {
 			$title = apply_filters( 'widget_title', $instance['title'] ); // к заголовку применяем фильтр (необязательно)
 			$contact_form = $instance['contact_form'];
-			
-			if ( ! empty( $title ) ) : ?>
-                <div class="section-title">
-                    <h2 class="title"><?php echo $title; ?></h2>
-                </div>
-			<?php endif;
 			?>
-            <div class="newsletter-widget">
-                <p>Nec feugiat nisl pretium fusce id velit ut tortor pretium.</p>
-				<?php echo do_shortcode("$contact_form"); ?>
+            <div class="aside-widget"> <?php
+					if (!empty($title)) : ?>
+                        <div class="section-title">
+                            <h2 class="title"><?php echo $title; ?></h2>
+                        </div>
+					<?php endif;
+				?>
+                <div class="newsletter-widget">
+                    <p>Nec feugiat nisl pretium fusce id velit ut tortor pretium.</p>
+					<?php echo do_shortcode("$contact_form"); ?>
+                </div>
             </div>
 			<?php
 		}
@@ -1145,40 +1126,42 @@ class trueTopPostsWidget extends WP_Widget {
 			$link_facebook = $instance['link_facebook'];
 			$link_twitter = $instance['link_twitter'];
 			$link_google = $instance['link_google'];
-			
-			if ( ! empty( $title ) ) : ?>
-                <div class="section-title">
-                    <h2 class="title"><?php echo $title; ?></h2>
-                </div>
-			<?php endif;
 			?>
-            <div class="social-widget">
-                <ul>
-                    <li>
-                        <a target="_blink"
-                           href="<?php echo $link_facebook; ?>"
-                           class="social-facebook">
-                            <i class="fa fa-facebook"></i>
-                            <span>21.2K<br>Followers</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a target="_blink"
-                           href="<?php echo $link_twitter; ?>"
-                           class="social-twitter">
-                            <i class="fa fa-twitter"></i>
-                            <span>10.2K<br>Followers</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a target="_blink"
-                           href="<?php echo $link_google; ?>"
-                           class="social-google-plus">
-                            <i class="fa fa-google-plus"></i>
-                            <span>5K<br>Followers</span>
-                        </a>
-                    </li>
-                </ul>
+            <div class="aside-widget"> <?php
+					if (!empty($title)) : ?>
+                        <div class="section-title">
+                            <h2 class="title"><?php echo $title; ?></h2>
+                        </div>
+					<?php endif;
+				?>
+                <div class="social-widget">
+                    <ul>
+                        <li>
+                            <a target="_blink"
+                               href="<?php echo $link_facebook; ?>"
+                               class="social-facebook">
+                                <i class="fa fa-facebook"></i>
+                                <span>21.2K<br>Followers</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blink"
+                               href="<?php echo $link_twitter; ?>"
+                               class="social-twitter">
+                                <i class="fa fa-twitter"></i>
+                                <span>10.2K<br>Followers</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blink"
+                               href="<?php echo $link_google; ?>"
+                               class="social-google-plus">
+                                <i class="fa fa-google-plus"></i>
+                                <span>5K<br>Followers</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 			<?php
 		}
