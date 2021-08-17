@@ -400,10 +400,10 @@ function twentytwenty_sidebar_registration() {
 
 	// Arguments used in all register_sidebar() calls.
 	$shared_args = array(
-		'before_title'  => '<h2 class="widget-title subheading heading-size-3">',
-		'after_title'   => '</h2>',
-		'before_widget' => '<div class="widget %2$s"><div class="widget-content">',
-		'after_widget'  => '</div></div>',
+		'before_title' => '<h3 class="footer-title">',
+		'after_title' => '</h3>',
+		'before_widget' => '<li>',
+		'after_widget' => '</li>',
 	);
 
 	// Footer #1.
@@ -411,24 +411,13 @@ function twentytwenty_sidebar_registration() {
 		array_merge(
 			$shared_args,
 			array(
-				'name'        => __( 'Footer #1', 'twentytwenty' ),
-				'id'          => 'sidebar-1',
-				'description' => __( 'Widgets in this area will be displayed in the first column in the footer.', 'twentytwenty' ),
+				'name'        => __( 'Footer', 'twentytwenty' ),
+				'id'          => 'footer-sidebar',
+				'description' => __( 'Widgets in this area will be displayed in the footer.', 'twentytwenty' ),
 			)
 		)
 	);
-
-	// Footer #2.
-	register_sidebar(
-		array_merge(
-			$shared_args,
-			array(
-				'name'        => __( 'Footer #2', 'twentytwenty' ),
-				'id'          => 'sidebar-2',
-				'description' => __( 'Widgets in this area will be displayed in the second column in the footer.', 'twentytwenty' ),
-			)
-		)
-	);
+	
 
 }
 
@@ -1263,7 +1252,6 @@ class trueTopPostsWidget extends WP_Widget {
 		unregister_widget('WP_Widget_Recent_Posts'); // Свежие записи
 		unregister_widget('WP_Widget_RSS'); // RSS
 		unregister_widget('WP_Widget_Search'); // Поиск
-		unregister_widget('WP_Widget_Tag_Cloud'); // Облако меток
 		unregister_widget('WP_Widget_Text'); // Текст
 		unregister_widget('WP_Nav_Menu_Widget'); // Произвольное меню
 	}

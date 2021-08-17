@@ -88,7 +88,7 @@
                     <div class="tags-widget">
                         <ul>
                             <?php
-                            dynamic_sidebar('test-1');
+                            dynamic_sidebar('footer-sidebar');
                             ?>
                         </ul>
                     </div>
