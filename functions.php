@@ -59,6 +59,13 @@ function widget_areas()
 			'description' => 'Test Area3'
 		)
 	);
+	register_sidebar(
+		array(
+			'name' => 'Sidebar Area',
+			'id' => 'test-4',
+			'description' => 'Test Area4'
+		)
+	);
 }
 
 add_action('widgets_init', 'widget_areas');
@@ -1128,23 +1135,122 @@ class trueTopPostsWidget extends WP_Widget {
 		}
 	}
 	//
-	
-    
-    function newsletterSubscriptonWidget_load() {
-	    register_widget( 'newsletterSubscriptonWidget' );
-    }
-    
-	function categoriesWidget_load() {
-		register_widget( 'categoriesWidget' );
+	class socialLinksWidget extends WP_Widget {
+		
+		/*
+		 * создание виджета
+		 */
+		function __construct() {
+			parent::__construct(
+				'socialLinksWidget',
+				'Social Links', // заголовок виджета_
+				array( 'description' => 'Social LinksWidget Widget' ) // описание
+			);
+		}
+		
+		/*
+		 * фронтэнд виджета
+		 */
+		public function widget( $args, $instance ) {
+			$title = apply_filters( 'widget_title', $instance['title'] ); // к заголовку применяем фильтр (необязательно)
+			$link_facebook = $instance['link_facebook'];
+			$link_twitter = $instance['link_twitter'];
+			$link_google = $instance['link_google'];
+			
+			if ( ! empty( $title ) ) : ?>
+                <div class="section-title">
+                    <h2 class="title"><?php echo $title; ?></h2>
+                </div>
+			<?php endif;
+			?>
+            <div class="social-widget">
+                <ul>
+                    <li>
+                        <a target="_blink"
+                           href="<?php echo $link_facebook; ?>"
+                           class="social-facebook">
+                            <i class="fa fa-facebook"></i>
+                            <span>21.2K<br>Followers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blink"
+                           href="<?php echo $link_twitter; ?>"
+                           class="social-twitter">
+                            <i class="fa fa-twitter"></i>
+                            <span>10.2K<br>Followers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blink"
+                           href="<?php echo $link_google; ?>"
+                           class="social-google-plus">
+                            <i class="fa fa-google-plus"></i>
+                            <span>5K<br>Followers</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+			<?php
+		}
+		
+		/*
+		 * бэкэнд виджета
+		 */
+		public function form( $instance ) {
+			if ( isset( $instance[ 'title' ] ) ) {
+				$title = $instance[ 'title' ];
+			}
+			if ( isset( $instance[ 'link_facebook' ] ) ) {
+				$link_facebook = $instance[ 'link_facebook' ];
+			}
+			if ( isset( $instance[ 'link_twitter' ] ) ) {
+				$link_twitter = $instance[ 'link_twitter' ];
+			}
+			if ( isset( $instance[ 'link_google' ] ) ) {
+				$link_google = $instance[ 'link_google' ];
+			}
+			?>
+            <p>
+                <label for="<?php echo $this->get_field_id( 'title' ); ?>">Заголовок</label>
+                <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+            </p>
+            <p>
+                <label for="<?php echo $this->get_field_id( 'link_facebook' ); ?>">Place your Facebook link here:</label>
+                <input id="<?php echo $this->get_field_id( 'link_facebook' ); ?>" name="<?php echo $this->get_field_name( 'link_facebook' ); ?>" type="text" value="<?php echo ($link_facebook) ? esc_attr( $link_facebook ) : '' ?>" size="3" />
+            </p>
+            <p>
+                <label for="<?php echo $this->get_field_id( 'link_twitter' ); ?>">Place your Twitter link here:</label>
+                <input id="<?php echo $this->get_field_id( 'link_twitter' ); ?>" name="<?php echo $this->get_field_name( 'link_twitter' ); ?>" type="text" value="<?php echo ($link_twitter) ? esc_attr( $link_twitter ) : '' ?>" size="3" />
+            </p>
+            <p>
+                <label for="<?php echo $this->get_field_id( 'link_google' ); ?>">Place your Google Plus link here:</label>
+                <input id="<?php echo $this->get_field_id( 'link_google' ); ?>" name="<?php echo $this->get_field_name( 'link_google' ); ?>" type="text" value="<?php echo ($link_google) ? esc_attr( $link_google ) : '' ?>" size="3" />
+            </p>
+			<?php
+		}
+		
+		/*
+		 * сохранение настроек виджета
+		 */
+		public function update( $new_instance, $old_instance ) {
+			$instance = array();
+			$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+			$instance['link_facebook'] = ( ! empty( $new_instance['link_facebook'] ) ) ? strip_tags( $new_instance['link_facebook'] ) : '';
+			$instance['link_twitter'] = ( ! empty( $new_instance['link_twitter'] ) ) ? strip_tags( $new_instance['link_twitter'] ) : '';
+			$instance['link_google'] = ( ! empty( $new_instance['link_google'] ) ) ? strip_tags( $new_instance['link_google'] ) : '';
+			return $instance;
+		}
 	}
 	
-	function true_top_posts_widget_load() {
+	function custom_widgets_load() {
 		register_widget( 'trueTopPostsWidget' );
+		register_widget( 'categoriesWidget' );
+		register_widget( 'newsletterSubscriptonWidget' );
+		register_widget( 'socialLinksWidget' );
 	}
 	
-	add_action( 'widgets_init', 'true_top_posts_widget_load' );
-	add_action( 'widgets_init', 'categoriesWidget_load' );
-	add_action( 'widgets_init', 'newsletterSubscriptonWidget_load' );
+	add_action( 'widgets_init', 'custom_widgets_load' );
 	
 	
 	function true_remove_default_widget() {
