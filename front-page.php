@@ -268,25 +268,28 @@
         <div class="container">
             <!-- row -->
             <div id="ajax-posts" class="row">
-	            <?php
-		            $args = array(
-			            'posts_per_page' => 3,
-		            );
-		            $lastposts = get_posts($args);
-		
-		            foreach ($lastposts as $post) {
-			            setup_postdata($post);
-			            ?>
+		        <?php
+			        $postsPerPage = 3;
+			        $args = array(
+				        'post_type' => 'post',
+				        'posts_per_page' => $postsPerPage,
+			        );
+			
+			        $loop = new WP_Query($args);
+			
+			        while ($loop->have_posts()) : $loop->the_post();
+				        ?>
+
                         <div class="col-md-8">
                             <div class="post post-row">
                                 <a class="post-img" href="<?php the_permalink(); ?>">
-						            <?php if (has_post_thumbnail()) : ?>
+							        <?php if (has_post_thumbnail()) : ?>
                                         <img src="<?php the_post_thumbnail_url(); ?>">
-						            <?php endif; ?>
+							        <?php endif; ?>
                                 </a>
                                 <div class="post-body">
                                     <div class="post-category">
-							            <?php the_category(' '); ?>
+								        <?php the_category(' '); ?>
                                     </div>
                                     <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                     </h3>
@@ -300,14 +303,16 @@
                                 </div>
                             </div>
                         </div>
-			            <?php
-		            }
-		            wp_reset_postdata();
-	            ?>
+			
+			        <?php
+			        endwhile;
+			        wp_reset_postdata();
+		        ?>
             </div>
             <div id="more_posts" class="section-row loadmore text-center">
                 <div class="primary-button">Load More</div>
             </div>
+            
             <!-- /row -->
         </div>
         <!-- /container -->

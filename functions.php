@@ -804,7 +804,7 @@ function twentytwenty_get_elements_array() {
 	
 	function more_post_ajax(){
 		
-		$ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 4;
+		$ppp = (isset($_POST["ppp"])) ? $_POST["ppp"] : 3;
 		$page = (isset($_POST['pageNumber'])) ? $_POST['pageNumber'] : 0;
 		
 		header("Content-Type: text/html");
