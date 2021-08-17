@@ -849,6 +849,7 @@ function twentytwenty_get_elements_array() {
 		
 		endwhile;
 		endif;
+  
 		wp_reset_postdata();
 		die($out);
 	}

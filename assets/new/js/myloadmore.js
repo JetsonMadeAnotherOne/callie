@@ -13,11 +13,14 @@ jQuery(function ($) {
             data: str,
             success: function(data){
                 var $data = $(data);
+                if($data.length <= ppp){
+                    $("#more_posts").remove();
+                    console.log($data.length,'$data.length');
+                }
                 if($data.length){
                     $("#ajax-posts").append($data);
                     $("#more_posts").attr("disabled",false);
-                } else{
-                    $("#more_posts").attr("disabled",true);
+                    console.log($data.length,'$data.length');
                 }
             },
             error : function(jqXHR, textStatus, errorThrown) {
